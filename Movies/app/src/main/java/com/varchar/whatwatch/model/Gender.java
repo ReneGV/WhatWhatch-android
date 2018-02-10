@@ -1,4 +1,4 @@
-package com.zeider.movies;
+package com.varchar.whatwatch.model;
 
 /**
  * Created by Zeider on 08/02/2018.

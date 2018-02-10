@@ -1,7 +1,4 @@
-package com.zeider.movies;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+package com.varchar.whatwatch.model;
 
 /**
  * Created by Zeider on 07/02/2018.

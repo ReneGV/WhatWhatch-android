@@ -1,4 +1,4 @@
-package com.zeider.movies;
+package com.varchar.whatwatch;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

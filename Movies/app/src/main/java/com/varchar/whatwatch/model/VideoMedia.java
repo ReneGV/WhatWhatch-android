@@ -1,4 +1,6 @@
-package com.zeider.movies;
+package com.varchar.whatwatch.model;
+
+import com.varchar.whatwatch.model.Gender;
 
 import java.net.MalformedURLException;
 import java.net.URL;

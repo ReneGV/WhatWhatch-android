@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Movies.iml" filepath="$PROJECT_DIR$/Movies.iml" />
+      <module fileurl="file://C:\Users\reneg\git\WhatWhatch-Android\Movies\Movies.iml" filepath="C:\Users\reneg\git\WhatWhatch-Android\Movies\Movies.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\reneg\git\WhatWhatch-Android\Movies\app\app.iml" filepath="C:\Users\reneg\git\WhatWhatch-Android\Movies\app\app.iml" />
     </modules>
   </component>
 </project>
