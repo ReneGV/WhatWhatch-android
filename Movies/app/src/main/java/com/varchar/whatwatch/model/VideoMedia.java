@@ -1,46 +1,97 @@
 package com.varchar.whatwatch.model;
 
-import com.varchar.whatwatch.model.Gender;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
-/**
- * Created by Zeider on 07/02/2018.
- */
+import java.security.PublicKey;
 
 public class VideoMedia {
-    int video_media_id;
-    String name;
-    String release_date;
-    String description;
-    URL image_url;
-    URL image_description_url;
-    Gender gender;
 
-    public VideoMedia(String name, String image_url) {
+    private int id;
+    private String name;
+    private String releaseDate;
+    private String description;
+    private URL imageUrl;
+    private URL imageDescriptionUrl;
+    private Gender gender;
+
+    public VideoMedia(){}
+
+    public VideoMedia(String name, String imageUrl) {
         this.name = name;
         URL url = null;
         try {
-            url = new URL(image_url);
+            url = new URL(imageUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        this.image_url = url;
+        this.imageUrl = url;
     }
 
-    public VideoMedia(String name, String release_date, String description, String image_description_url, String gender_name) {
+    public VideoMedia(String name, String releaseDate, String description, String imageDescriptionUrl, String gender_name) {
         this.name = name;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
         this.description = description;
         try {
-            this.image_description_url = new URL(image_description_url);
+            this.imageDescriptionUrl = new URL(imageDescriptionUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         this.gender = new Gender(gender_name);
     }
 
+    public int getId() {
+        return id;
+    }
 
-    //TODO functions getCollectionViewImages and getDetailImage
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public URL getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(URL imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public URL getImageDescriptionUrl() {
+        return imageDescriptionUrl;
+    }
+
+    public void setImageDescriptionUrl(URL imageDescriptionUrl) {
+        this.imageDescriptionUrl = imageDescriptionUrl;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }

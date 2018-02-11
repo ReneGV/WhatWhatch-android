@@ -1,19 +1,21 @@
 package com.varchar.whatwatch.model;
 
-/**
- * Created by Zeider on 08/02/2018.
- */
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gender {
-    int id;
-    String name="undefined";
-    Movie[] moviesList;
-    TvSerie[] seriesList;
+
+    private int id;
+    private String name;
+    private List<VideoMedia> moviesList;
 
     public Gender() {
+        name = "undefined";
+        moviesList = new ArrayList<>();
     }
 
     public Gender(String name) {
+        this();
         this.name = name;
     }
 }
