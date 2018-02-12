@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_movie"
+            android:icon="@drawable/ic_menu_movie"
+            android:title="Películas" />
+        <item
+            android:id="@+id/nav_serie"
+            android:icon="@drawable/ic_menu_tv_serie"
+            android:title="Series" />
+        <item
+            android:id="@+id/nav_premium"
+            android:icon="@drawable/ic_menu_credit_gard"
+            android:title="Premium" />
+    </group>
+
+    <item android:title="Contacto">
+        <menu>
+            <item
+                android:id="@+id/nav_mail"
+                android:icon="@drawable/ic_menu_mail"
+                android:title="Mail" />
+            <item
+                android:id="@+id/nav_facebook"
+                android:icon="@drawable/ic_menu_facebook"
+                android:title="Facebook" />
+        </menu>
+    </item>
+
+    <item android:title="Configuración">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="Configutación" />
+        </menu>
+    </item>
+
+</menu>
