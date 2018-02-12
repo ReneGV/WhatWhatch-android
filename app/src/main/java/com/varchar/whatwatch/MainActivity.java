@@ -1,6 +1,8 @@
 package com.varchar.whatwatch;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +20,17 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // TODO Edit scope
+    final String  APPLICATION_THEME = "ApplicationTheme";
+
+    private NavigationView navigationView;
+    private FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: Fetch the theme acording to shared preferences configuration eg: set
+        setThemeFromPreferences();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -30,9 +41,41 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Cierra y vuelve a abrir",Snackbar.LENGTH_LONG).show();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                SharedPreferences.Editor editor = preferences.edit();
+                if (preferences.getInt(APPLICATION_THEME,0) == 0){
+                    editor.putInt(APPLICATION_THEME, 1);
+                }else {
+                    editor.putInt(APPLICATION_THEME, 0);
+                }
+                editor.apply();
+            }
+        });
+
+    }
+
+    public  void setThemeFromPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        int theme = preferences.getInt(APPLICATION_THEME,0);
+        switch (theme){
+            case 0:
+                setTheme(R.style.AppTheme);
+                break;
+            case 1:
+            default:
+                setTheme(R.style.LightTheme);
+                break;
+        }
+        Log.d("THEME", Integer.toString(theme));
     }
 
     @Override
@@ -70,6 +113,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
+        navigationView.setCheckedItem(item.getItemId());
         item.setChecked(true);
         int id = item.getItemId();
 
