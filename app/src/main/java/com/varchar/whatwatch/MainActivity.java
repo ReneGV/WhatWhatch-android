@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SettingsFragment.newInstance("",""),"SETTINGS");
+        getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SeriesFragment.newInstance("",""),"SERIES").commit();
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
        /* floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +132,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_movie) {
             // Handle the camera action
         } else if (id == R.id.nav_serie) {
+            getSupportFragmentManager().popBackStack();
+            drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_premium) {
 
@@ -154,7 +157,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = null;
             while (fragmentManager.popBackStackImmediate());
             transaction = fragmentManager.beginTransaction().replace(idContainer, fragment);
-            if (!(fragment instanceof SettingsFragment)){
+            if (!(fragment instanceof SeriesFragment)){
                 transaction.addToBackStack(tag);
             }
             transaction.commit();

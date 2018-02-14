@@ -65,10 +65,6 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
     }
 
     @Override
@@ -87,7 +83,8 @@ public class SettingsFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final SharedPreferences.Editor editor = preferences.edit();
 
-        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        // Setting Radio Button Selection
+
         int theme = preferences.getInt(APPLICATION_THEME,0);
         switch (theme){
             case 0:
@@ -101,9 +98,8 @@ public class SettingsFragment extends Fragment {
                 break;
         }
 
-
-
-
+        //  Radio Group Listener
+        // save in preferences the selected theme
         themeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -122,13 +118,11 @@ public class SettingsFragment extends Fragment {
                 }
                 editor.apply();
 
-
             }
         });
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_settings, container, false);
         return fragment;
     }
-
 
 }
