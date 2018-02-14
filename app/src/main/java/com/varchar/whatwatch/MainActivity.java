@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,8 +26,10 @@ public class MainActivity extends AppCompatActivity
     // TODO Edit scope
     final String  APPLICATION_THEME = "ApplicationTheme";
 
+
     private NavigationView navigationView;
     private FloatingActionButton floatingActionButton;
+    //private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,10 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SettingsFragment.newInstance("",""),"SETTINGS");
+
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+       /* floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "Cierra y vuelve a abrir",Snackbar.LENGTH_LONG).show();
@@ -59,7 +66,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 editor.apply();
             }
-        });
+        });*/
 
     }
 
@@ -117,6 +124,10 @@ public class MainActivity extends AppCompatActivity
         item.setChecked(true);
         int id = item.getItemId();
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+
         if (id == R.id.nav_movie) {
             // Handle the camera action
         } else if (id == R.id.nav_serie) {
@@ -128,11 +139,25 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_mail) {
 
         } else if (id == R.id.nav_settings) {
+            switchFragment(R.id.containerMain, SettingsFragment.newInstance("",""), "SETTINGS");
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    private void switchFragment(int idContainer, Fragment fragment, String tag){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragment != null){
+            FragmentTransaction transaction = null;
+            while (fragmentManager.popBackStackImmediate());
+            transaction = fragmentManager.beginTransaction().replace(idContainer, fragment);
+            if (!(fragment instanceof SettingsFragment)){
+                transaction.addToBackStack(tag);
+            }
+            transaction.commit();
+        }
     }
 }
