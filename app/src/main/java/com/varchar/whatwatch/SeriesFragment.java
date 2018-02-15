@@ -93,5 +93,4 @@ public class SeriesFragment extends Fragment {
 
         return genders;
     }
-
 }

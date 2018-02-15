@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SeriesFragment.newInstance("",""),"SERIES").commit();
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        //floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
        /* floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,8 +138,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_premium) {
 
         } else if (id == R.id.nav_mail) {
+            switchFragment(R.id.containerMain, MailFragment.newInstance("",""), "MAIL");
+            drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_mail) {
+            switchFragment(R.id.containerMain, MailFragment.newInstance("",""), "MAIL");
+            drawer.closeDrawer(GravityCompat.START);
 
         } else if (id == R.id.nav_settings) {
             switchFragment(R.id.containerMain, SettingsFragment.newInstance("",""), "SETTINGS");
