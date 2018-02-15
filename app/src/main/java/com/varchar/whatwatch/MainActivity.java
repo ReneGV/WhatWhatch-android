@@ -53,22 +53,6 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SeriesFragment.newInstance("",""),"SERIES").commit();
 
-        //floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-       /* floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Cierra y vuelve a abrir",Snackbar.LENGTH_LONG).show();
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                SharedPreferences.Editor editor = preferences.edit();
-                if (preferences.getInt(APPLICATION_THEME,0) == 0){
-                    editor.putInt(APPLICATION_THEME, 1);
-                }else {
-                    editor.putInt(APPLICATION_THEME, 0);
-                }
-                editor.apply();
-            }
-        });*/
-
     }
 
     public  void setThemeFromPreferences(){

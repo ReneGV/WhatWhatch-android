@@ -80,6 +80,7 @@ public class MailFragment extends Fragment {
             public void onClick(View v) {
                 String email = emailTextInputLayout.getEditText().getText().toString();
                 if (isEmailValid(email)){
+                    // Setting values to send an e-mail
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setData(Uri.parse("mailto:"));
                     String[] to = {email};
@@ -98,6 +99,7 @@ public class MailFragment extends Fragment {
         return fragment;
     }
 
+    //Validating email addres
     public static boolean isEmailValid(String email){
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);

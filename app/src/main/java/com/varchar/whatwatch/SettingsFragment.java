@@ -72,19 +72,17 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View fragment = inflater.inflate(R.layout.fragment_settings, container, false);
-        //themeRadioGroup =(RadioGroup) fragment.findViewWithTag(themeRadioGroup);
-        //blackRadioButton = (RadioButton) fragment.findViewWithTag(blackRadioButton);
-        //whiteRadioButton = (RadioButton)fragment.findViewWithTag(whiteRadioButton);
         themeRadioGroup = (RadioGroup)fragment.findViewById(R.id.themeRadioGroup);
         blackRadioButton = (RadioButton)fragment.findViewById(R.id.blackRadioButton);
         whiteRadioButton = (RadioButton)fragment.findViewById(R.id.whiteRadioButton);
+
+        // TODO: Apply Button in this view is for more settings in future version
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final SharedPreferences.Editor editor = preferences.edit();
 
         // Setting Radio Button Selection
-
         int theme = preferences.getInt(APPLICATION_THEME,0);
         switch (theme){
             case 0:
@@ -120,8 +118,6 @@ public class SettingsFragment extends Fragment {
 
             }
         });
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_settings, container, false);
         return fragment;
     }
 

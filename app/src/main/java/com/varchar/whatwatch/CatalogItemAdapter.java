@@ -36,7 +36,6 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_catalog,parent,false);
         CatalogItemHolder catalogItemHolder = new CatalogItemHolder(item);
 
-
         return catalogItemHolder;
     }
 
@@ -62,11 +61,11 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
             super(itemView);
             genderTextView = (TextView)itemView.findViewById(R.id.genderTextView);
             imagesRecyclerView = (RecyclerView)itemView.findViewById(R.id.imagesRecyclerView);
+
+            //Setting second recycler view (to show images)
             StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
             imagesRecyclerView.setHasFixedSize(true);
             imagesRecyclerView.setLayoutManager(manager);
-            //ImageItemAdapter imageItemAdapter = new ImageItemAdapter(getImages());
-            //imagesRecyclerView.setAdapter(imageItemAdapter);
         }
     }
 
