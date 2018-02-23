@@ -1,5 +1,8 @@
 package com.varchar.whatwatch;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -19,13 +22,22 @@ import java.util.List;
 public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.CatalogItemHolder> {
 
     private List<String> Gender;
+    private Context context;
+    final String CATALOG = "Catalog";
+    int catalog=0;
 
-    public CatalogItemAdapter(List<String> genders) {
+
+
+    public CatalogItemAdapter(List<String> genders, int catalog) {
         if (genders == null){
             this.Gender = new ArrayList<>();
+            this.catalog = 0;
+
         }
         else{
             this.Gender = genders;
+            this.catalog = catalog;
+
         }
     }
 //    private RecyclerView imagesRecyclerView;
@@ -41,8 +53,20 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
 
     @Override
     public void onBindViewHolder(CatalogItemAdapter.CatalogItemHolder holder, int position) {
+
+
+
         holder.genderTextView.setText(Gender.get(position));
-        ImageItemAdapter imageItemAdapter = new ImageItemAdapter(getImages(Gender.get(position)));
+        ImageItemAdapter imageItemAdapter;
+
+        if (this.catalog == 0){
+            imageItemAdapter = new ImageItemAdapter(getImagesMovies(Gender.get(position)));
+        }
+        else {
+            imageItemAdapter = new ImageItemAdapter(getImages(Gender.get(position)));
+        }
+
+        //imageItemAdapter = new ImageItemAdapter(getImages(Gender.get(position)));
         holder.imagesRecyclerView.setAdapter(imageItemAdapter);
 
     }
@@ -56,6 +80,7 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
 
         protected TextView genderTextView;
         protected RecyclerView imagesRecyclerView;
+
 
         public CatalogItemHolder(View itemView) {
             super(itemView);
@@ -107,6 +132,42 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
                 images.add(R.drawable.sfate);
                 images.add(R.drawable.sonceuponatime);
                 images.add(R.drawable.ssupergirl);
+                break;
+            default:
+                images.add(R.drawable.sarrow);
+                images.add(R.drawable.sdaredevil);
+                images.add(R.drawable.sspartacus);
+                break;
+        }
+        return images;
+
+    }
+
+    public List<Integer> getImagesMovies(String gender){
+        List<Integer> images = new ArrayList<>();
+        //images.add(R.drawable)
+        switch (gender){
+            case "Comedia":
+                images.add(R.drawable.comoninos);
+                images.add(R.drawable.scottpilgrim);
+                break;
+            case "Acción":
+                images.add(R.drawable.transformers);
+                images.add(R.drawable.olimpo);
+                break;
+            case "Ciencia Ficción":
+                images.add(R.drawable.meninblack);
+                break;
+            case "Terror":
+                images.add(R.drawable.avengers);
+                images.add(R.drawable.elmstreet);
+                images.add(R.drawable.nochedemonio);
+                break;
+            case "Animación":
+                images.add(R.drawable.ratatouille);
+                images.add(R.drawable.hoteltransylvania);
+                images.add(R.drawable.toystory);
+                images.add(R.drawable.jack);
                 break;
             default:
                 images.add(R.drawable.sarrow);

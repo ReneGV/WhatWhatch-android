@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     // TODO Edit scope
     final String  APPLICATION_THEME = "ApplicationTheme";
-
+    final String  CATALOG = "Catalog";
 
     private NavigationView navigationView;
     private FloatingActionButton floatingActionButton;
@@ -109,13 +109,25 @@ public class MainActivity extends AppCompatActivity
         item.setChecked(true);
         int id = item.getItemId();
 
+        //to save series or movies catalog
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = preferences.edit();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
 
         if (id == R.id.nav_movie) {
+            editor.putInt(CATALOG, 0);
+            editor.apply();
+            switchFragment(R.id.containerMain, SeriesFragment.newInstance("",""), "MOVIE");
+            drawer.closeDrawer(GravityCompat.START);
+
             // Handle the camera action
         } else if (id == R.id.nav_serie) {
+            editor.putInt(CATALOG, 1);
+            editor.apply();
+            switchFragment(R.id.containerMain, SeriesFragment.newInstance("",""), "SERIE");
             getSupportFragmentManager().popBackStack();
             drawer.closeDrawer(GravityCompat.START);
 
