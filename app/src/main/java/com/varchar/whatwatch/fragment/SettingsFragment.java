@@ -1,10 +1,9 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.fragment;
 
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.service.carrier.CarrierMessagingService;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.varchar.whatwatch.R;
 
 //import com.varchar.WhatWatch.R;
 

@@ -1,0 +1,81 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="192dp"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+            app:toolbarId="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/dv_app_bar_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/video_default" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dv_vm_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8sp"
+                android:layout_marginEnd="8sp"
+                android:layout_marginLeft="8sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="8sp"
+                android:text="Title"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dv_vm_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16sp"
+                android:layout_marginLeft="16sp"
+                android:layout_marginRight="16sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="0sp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. Vivamus sit amet mauris tincidunt, accumsan nunc quis, tempor nibh. Sed sollicitudin augue ut justo vulputate, id ultricies quam posuere. Fusce velit dolor, tempus vitae aliquet in, iaculis pharetra sem. Nulla facilisi. Mauris maximus neque quis enim fringilla scelerisque. Duis mattis volutpat lacinia. Nulla bibendum libero in blandit ultrices. Mauris nec lectus sit amet ex maximus viverra. Phasellus laoreet enim elit, sit amet hendrerit dolor dictum ac. Etiam vel molestie felis, nec vestibulum nisl. Vivamus quis erat ut ligula viverra varius. Ut faucibus massa diam, eget eleifend enim mollis rutrum.  Fusce ac erat convallis, convallis dolor in, vehicula mauris. Aliquam sodales dolor magna, sed sagittis diam blandit ac. Aenean ac varius quam. Suspendisse tempor aliquam blandit. Etiam id purus blandit, laoreet dolor ac, congue velit. Cras pharetra sem nec neque sagittis, gravida mollis velit facilisis. Morbi tristique rhoncus sapien in consectetur."
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_favorite"
+        app:backgroundTint="@android:color/holo_blue_dark" />
+</android.support.design.widget.CoordinatorLayout>

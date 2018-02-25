@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,9 +15,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.varchar.whatwatch.fragment.DetailFragment;
+import com.varchar.whatwatch.fragment.MailFragment;
+import com.varchar.whatwatch.fragment.VideoMediaFragment;
+import com.varchar.whatwatch.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +42,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.containerMain,SeriesFragment.newInstance("",""),"SERIES").commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.containerMain, VideoMediaFragment.newInstance("",""),"SERIES").commit();
 
     }
 
@@ -73,11 +75,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        }
+        /*
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     @Override
@@ -120,28 +126,27 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_movie) {
             editor.putInt(CATALOG, 0);
             editor.apply();
-            switchFragment(R.id.containerMain, SeriesFragment.newInstance("",""), "MOVIE");
+            switchFragment(R.id.containerMain, VideoMediaFragment.newInstance("",""), "MOVIE");
             drawer.closeDrawer(GravityCompat.START);
 
             // Handle the camera action
         } else if (id == R.id.nav_serie) {
             editor.putInt(CATALOG, 1);
             editor.apply();
-            switchFragment(R.id.containerMain, SeriesFragment.newInstance("",""), "SERIE");
+            switchFragment(R.id.containerMain, VideoMediaFragment.newInstance("",""), "SERIE");
             getSupportFragmentManager().popBackStack();
             drawer.closeDrawer(GravityCompat.START);
 
-        } else if (id == R.id.nav_premium) {
-
-        } else if (id == R.id.nav_mail) {
+        } //else if (id == R.id.nav_premium) {}
+        else if (id == R.id.favourites) {
+            switchFragment(R.id.containerMain, DetailFragment.newInstance("",""), "FAVORITE");
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (id == R.id.nav_mail) {
             switchFragment(R.id.containerMain, MailFragment.newInstance("",""), "MAIL");
             drawer.closeDrawer(GravityCompat.START);
 
-        } else if (id == R.id.nav_mail) {
-            switchFragment(R.id.containerMain, MailFragment.newInstance("",""), "MAIL");
-            drawer.closeDrawer(GravityCompat.START);
-
-        } else if (id == R.id.nav_settings) {
+        }  else if (id == R.id.nav_settings) {
             switchFragment(R.id.containerMain, SettingsFragment.newInstance("",""), "SETTINGS");
             drawer.closeDrawer(GravityCompat.START);
             return true;
@@ -157,10 +162,12 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = null;
             while (fragmentManager.popBackStackImmediate());
             transaction = fragmentManager.beginTransaction().replace(idContainer, fragment);
-            if (!(fragment instanceof SeriesFragment)){
+            if (!(fragment instanceof VideoMediaFragment)){
                 transaction.addToBackStack(tag);
             }
             transaction.commit();
         }
     }
+
+
 }

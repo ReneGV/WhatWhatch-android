@@ -1,11 +1,10 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.fragment;
 
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 //import com.varchar.WhatWatch.R;
+
+import com.varchar.whatwatch.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.fragment;
 
 
 import android.content.SharedPreferences;
@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.varchar.whatwatch.model.MovieAdapter;
+import com.varchar.whatwatch.CatalogItemAdapter;
+import com.varchar.whatwatch.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SeriesFragment#newInstance} factory method to
+ * Use the {@link VideoMediaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SeriesFragment extends Fragment {
+public class VideoMediaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +41,7 @@ public class SeriesFragment extends Fragment {
 
 
 
-    public SeriesFragment() {
+    public VideoMediaFragment() {
         // Required empty public constructor
     }
 
@@ -50,11 +51,11 @@ public class SeriesFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SeriesFragment.
+     * @return A new instance of fragment VideoMediaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SeriesFragment newInstance(String param1, String param2) {
-        SeriesFragment fragment = new SeriesFragment();
+    public static VideoMediaFragment newInstance(String param1, String param2) {
+        VideoMediaFragment fragment = new VideoMediaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

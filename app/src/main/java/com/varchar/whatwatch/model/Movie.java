@@ -1,6 +1,8 @@
 package com.varchar.whatwatch.model;
 
-public class Movie extends  VideoMedia {
+import java.io.Serializable;
+
+public class Movie extends  VideoMedia implements Serializable {
 
     private int movieId;
     private int length;

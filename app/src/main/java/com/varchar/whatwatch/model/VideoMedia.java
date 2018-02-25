@@ -1,10 +1,16 @@
 package com.varchar.whatwatch.model;
 
+import android.provider.MediaStore;
+
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.PublicKey;
 
-public class VideoMedia {
+//FIXME: DELETE HARDCODED IMAGES ID
+public class VideoMedia implements Serializable{
+
+    private static final long serialVersionUID = 8799656478674716638L;
 
     private int id;
     private String name;
@@ -13,6 +19,19 @@ public class VideoMedia {
     private URL imageUrl;
     private URL imageDescriptionUrl;
     private Gender gender;
+
+    //TODO: DELETE THIS IMAGE ID, AND FETCH THE IMAGE FROM WS
+    private int imageId;
+    //TODO: DELETE THIS GETTET
+    public int getImageId() { return this.imageId;}
+    //TODO: DELETE THIS STATIC FACTORY METHOD
+    // Set image from local drawable resources
+    public static VideoMedia fromLocalResources(int imageId, String name){
+        VideoMedia videoMedia = new VideoMedia();
+        videoMedia.imageId = imageId;
+        videoMedia.name = name;
+        return videoMedia;
+    }
 
     public VideoMedia(){}
 
