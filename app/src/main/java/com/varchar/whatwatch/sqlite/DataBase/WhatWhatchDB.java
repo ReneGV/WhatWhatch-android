@@ -14,8 +14,15 @@ import java.util.List;
 
 public class WhatWhatchDB extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "WhatWatch.db";
+
+    private  static  final String sqlCreate = "CREATE TABLE " + VideoMediaEntry.TABLE_NAME + " ("
+            + VideoMediaEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + VideoMediaEntry.ID + " INTEGER,"
+            + VideoMediaEntry.NAME + " TEXT NOT NULL,"
+            + VideoMediaEntry.LOCAL_IMAGE_ID + " INTEGER NOT NULL,"
+            + "UNIQUE (" + VideoMediaEntry.NAME + "))";
 
     private static WhatWhatchDB dbInstance;
 
@@ -32,13 +39,15 @@ public class WhatWhatchDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + VideoMediaEntry.TABLE_NAME + " ("
-                + VideoMediaEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + VideoMediaEntry.ID + " INTEGER,"
-                + VideoMediaEntry.NAME + " TEXT NOT NULL,"
-                + VideoMediaEntry.LOCAL_IMAGE_ID + " INTEGER NOT NULL,"
-                + "UNIQUE (" + VideoMediaEntry.ID + "))");
+        sqLiteDatabase.execSQL(sqlCreate);
     }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + VideoMediaEntry.TABLE_NAME);
+        db.execSQL(sqlCreate);
+    }
+
 
     public static long saveFavourite(VideoMedia videoMedia) {
         SQLiteDatabase sqLiteDatabase = dbInstance.getWritableDatabase();
@@ -74,9 +83,5 @@ public class WhatWhatchDB extends SQLiteOpenHelper{
             favourites.add(VideoMedia.fromLocalResources(localResourceId, name));
         }
         return favourites;
-    }
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }
