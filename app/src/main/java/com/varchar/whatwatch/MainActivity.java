@@ -23,6 +23,7 @@ import com.varchar.whatwatch.fragment.GridVideoMediaFragment;
 import com.varchar.whatwatch.fragment.ListVideoMediaFragment;
 import com.varchar.whatwatch.fragment.MailFragment;
 import com.varchar.whatwatch.fragment.SettingsFragment;
+import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity
         // TODO: Fetch the theme acording to shared preferences configuration eg: set
         setThemeFromPreferences();
         setContentView(R.layout.activity_main);
+
+        WhatWhatchDB whatWhatchDB =  WhatWhatchDB.getInstance(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

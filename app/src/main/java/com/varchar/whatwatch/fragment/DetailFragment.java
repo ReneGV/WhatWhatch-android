@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.varchar.whatwatch.adapter.HorizontalItemAdapter;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.VideoMedia;
+import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
 
 
 /**
@@ -89,6 +90,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void addToFavourites(VideoMedia videoMedia){
+        WhatWhatchDB.saveFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue añadido a favoritos", Snackbar.LENGTH_LONG).show();
     }
 }
