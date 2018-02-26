@@ -63,6 +63,18 @@ public class WhatWhatchDB extends SQLiteOpenHelper{
                 values);
     }
 
+    public static boolean isFavoutie(VideoMedia videoMedia){
+        String query = "SELECT * FROM " + VideoMediaEntry.TABLE_NAME + " WHERE " + VideoMediaEntry.NAME + "=?";
+        Cursor cursor = dbInstance.getReadableDatabase().rawQuery(query, new String[]{videoMedia.getName()});
+        return cursor.moveToNext();
+    }
+
+    public static void deleteFavourite(VideoMedia videoMedia){
+        dbInstance.getWritableDatabase().delete(VideoMediaEntry.TABLE_NAME,
+                VideoMediaEntry.NAME + "=?" , new String[]{videoMedia.getName()});
+    }
+
+
     public static List<VideoMedia> getAllFavourites(){
         SQLiteDatabase sqLiteDatabase = dbInstance.getReadableDatabase();
 

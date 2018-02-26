@@ -78,13 +78,27 @@ public class DetailFragment extends Fragment {
         ImageView imageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
         imageView.setImageResource(videoMedia.getImageId());
         //TODO edit favourite button dispay logic
-        final FloatingActionButton addToFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
-        addToFavourites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToFavourites(DetailFragment.this.videoMedia);
-            }
-        });
+        final FloatingActionButton buttonFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
+        if (WhatWhatchDB.isFavoutie(videoMedia)){
+            //buttonFavourites.setVisibility(View.GONE);
+            buttonFavourites.setImageResource(R.drawable.ic_dislike);
+            buttonFavourites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteFromFavourites(DetailFragment.this.videoMedia);
+                    buttonFavourites.setVisibility(View.GONE);
+                }
+            });
+
+        }else{
+            buttonFavourites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addToFavourites(DetailFragment.this.videoMedia);
+                    buttonFavourites.setVisibility(View.GONE);
+                }
+            });
+        }
 
         return view;
     }
@@ -92,5 +106,10 @@ public class DetailFragment extends Fragment {
     private void addToFavourites(VideoMedia videoMedia){
         WhatWhatchDB.saveFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue añadido a favoritos", Snackbar.LENGTH_LONG).show();
+    }
+
+    private void deleteFromFavourites(VideoMedia videoMedia){
+        WhatWhatchDB.deleteFavourite(videoMedia);
+        Snackbar.make(getView(), videoMedia.getName() + " fue removido de favoritos", Snackbar.LENGTH_LONG).show();
     }
 }
