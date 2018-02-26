@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:id="@+id/fv_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/fv_poster"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/default_movie" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/fv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video media name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fv_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fv_name"
+                android:layout_marginTop="2dp"
+                android:text="Data..."
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/fv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fv_data"
+                android:layout_marginTop="2dp"
+                android:text="..."
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

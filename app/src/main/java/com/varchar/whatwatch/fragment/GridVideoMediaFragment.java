@@ -13,20 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.varchar.whatwatch.CatalogItemAdapter;
+import com.varchar.whatwatch.adapter.CatalogItemAdapter;
 import com.varchar.whatwatch.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.varchar.WhatWatch.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VideoMediaFragment#newInstance} factory method to
+ * Use the {@link GridVideoMediaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VideoMediaFragment extends Fragment {
+public class GridVideoMediaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,9 +38,7 @@ public class VideoMediaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
-
-    public VideoMediaFragment() {
+    public GridVideoMediaFragment() {
         // Required empty public constructor
     }
 
@@ -51,11 +48,11 @@ public class VideoMediaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment VideoMediaFragment.
+     * @return A new instance of fragment GridVideoMediaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static VideoMediaFragment newInstance(String param1, String param2) {
-        VideoMediaFragment fragment = new VideoMediaFragment();
+    public static GridVideoMediaFragment newInstance(String param1, String param2) {
+        GridVideoMediaFragment fragment = new GridVideoMediaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,8 +75,8 @@ public class VideoMediaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View fragment = inflater.inflate(R.layout.fragment_series, container, false);
-        genderRecyclerView = (RecyclerView)fragment.findViewById(R.id.genderRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_grid_video_media, container, false);
+        genderRecyclerView = (RecyclerView)view.findViewById(R.id.genderRecyclerView);
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
         genderRecyclerView.setHasFixedSize(true);
         genderRecyclerView.setLayoutManager(manager);
@@ -96,7 +93,7 @@ public class VideoMediaFragment extends Fragment {
             catalogItemAdapter = new CatalogItemAdapter(getGenders(), catalog);
         }
         genderRecyclerView.setAdapter(catalogItemAdapter);
-        return fragment;
+        return view;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.VideoMedia;
 
 import java.util.ArrayList;
@@ -18,18 +19,37 @@ import java.util.List;
  */
 public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.CatalogItemHolder> {
 
+    // INNER CLASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    public class CatalogItemHolder extends RecyclerView.ViewHolder {
+
+        protected TextView genderTextView;
+        protected RecyclerView imagesRecyclerView;
+
+
+        public CatalogItemHolder(View itemView) {
+            super(itemView);
+            genderTextView = (TextView)itemView.findViewById(R.id.genderTextView);
+            imagesRecyclerView = (RecyclerView)itemView.findViewById(R.id.imagesRecyclerView);
+
+            //Setting second recycler view (to show images)
+            StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+            imagesRecyclerView.setHasFixedSize(true);
+            imagesRecyclerView.setLayoutManager(manager);
+        }
+    }
+
+    // ATTRIBUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     private List<String> Gender;
     private Context context;
     final String CATALOG = "Catalog";
     int catalog=0;
 
-
-
     public CatalogItemAdapter(List<String> genders, int catalog) {
         if (genders == null){
             this.Gender = new ArrayList<>();
             this.catalog = 0;
-
         }
         else{
             this.Gender = genders;
@@ -70,27 +90,10 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
         return Gender.size();
     }
 
-    public class CatalogItemHolder extends RecyclerView.ViewHolder {
-
-        protected TextView genderTextView;
-        protected RecyclerView imagesRecyclerView;
-
-
-        public CatalogItemHolder(View itemView) {
-            super(itemView);
-            genderTextView = (TextView)itemView.findViewById(R.id.genderTextView);
-            imagesRecyclerView = (RecyclerView)itemView.findViewById(R.id.imagesRecyclerView);
-
-            //Setting second recycler view (to show images)
-            StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-            imagesRecyclerView.setHasFixedSize(true);
-            imagesRecyclerView.setLayoutManager(manager);
-        }
-    }
 
     // FIXME: FETCH VideoMedia items from web service
     // TODO : iterate throug series list
-    public List<VideoMedia> getSeries(String gender){
+    public static List<VideoMedia> getSeries(String gender){
         List<VideoMedia> images = new ArrayList<>();
         switch (gender){
             case "Acción":

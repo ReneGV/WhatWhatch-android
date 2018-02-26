@@ -1,20 +1,19 @@
 package com.varchar.whatwatch.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.varchar.whatwatch.HorizontalItemAdapter;
+import com.varchar.whatwatch.adapter.HorizontalItemAdapter;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.VideoMedia;
 
-//import com.varchar.WhatWatch.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,12 +69,26 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         videoMedia = (VideoMedia) getActivity().getIntent().getSerializableExtra(HorizontalItemAdapter.VIDEO_MEDIA_KEY);
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        // Set detail view text
         TextView textView = (TextView) view.findViewById(R.id.dv_vm_title);
         textView.setText( videoMedia.getName() );
+        // Set the image
+        // TODO: fetch imagee from web
         ImageView imageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
         imageView.setImageResource(videoMedia.getImageId());
+        //TODO edit favourite button dispay logic
+        final FloatingActionButton addToFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
+        addToFavourites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToFavourites(DetailFragment.this.videoMedia);
+            }
+        });
+
         return view;
     }
 
-
+    private void addToFavourites(VideoMedia videoMedia){
+        Snackbar.make(getView(), videoMedia.getName() + " fue añadido a favoritos", Snackbar.LENGTH_LONG).show();
+    }
 }

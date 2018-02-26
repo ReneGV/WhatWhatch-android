@@ -1,16 +1,13 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.adapter;
 
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.fragment.DetailFragment;
 import com.varchar.whatwatch.model.VideoMedia;
 
@@ -41,6 +38,8 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
     // ATTRIBUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Modify to use wS
     private List<VideoMedia> videoMediaItems;
+
+    // CONSTRUCTOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public HorizontalItemAdapter(List<VideoMedia> videoMediaItems) {
         if (videoMediaItems == null){
