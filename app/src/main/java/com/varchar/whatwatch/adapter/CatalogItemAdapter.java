@@ -126,7 +126,6 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
                 images.add( VideoMedia.fromLocalResources(R.drawable.srevenge , "Reveng"));
                 break;
             case "Fantasía":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sfate , "Fate"));
                 images.add( VideoMedia.fromLocalResources(R.drawable.sonceuponatime, "Once upon a time"));
                 images.add( VideoMedia.fromLocalResources(R.drawable.ssupergirl, "Super Girl"));
                 break;

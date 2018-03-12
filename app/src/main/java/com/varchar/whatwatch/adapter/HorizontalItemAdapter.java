@@ -2,6 +2,7 @@ package com.varchar.whatwatch.adapter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,7 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
 
     @Override
     public void onBindViewHolder(ImageItemHolder holder, int position) {
+        Log.d("[Movie]", videoMediaItems.get(position).getName());
         holder.itemImageView.setImageResource(videoMediaItems.get(position).getImageId());
         // Bind each holder with the corresponding video media
         holder.videoMedia = videoMediaItems.get(position);
