@@ -71,16 +71,16 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
     @Override
     public void onBindViewHolder(CatalogItemAdapter.CatalogItemHolder holder, int position) {
         holder.genderTextView.setText(Gender.get(position));
-        HorizontalItemAdapter imageItemAdapter;
+        GenreItemAdapter imageItemAdapter;
 
         if (this.catalog == 0){
-            imageItemAdapter = new HorizontalItemAdapter(getMovies(Gender.get(position)));
+            imageItemAdapter = new GenreItemAdapter(getMovies(Gender.get(position)));
         }
         else {
-            imageItemAdapter = new HorizontalItemAdapter(getSeries(Gender.get(position)));
+            imageItemAdapter = new GenreItemAdapter(getSeries(Gender.get(position)));
         }
 
-        //imageItemAdapter = new HorizontalItemAdapter(getSeries(Gender.get(position)));
+        //imageItemAdapter = new GenreItemAdapter(getSeries(Gender.get(position)));
         holder.imagesRecyclerView.setAdapter(imageItemAdapter);
 
     }
@@ -128,6 +128,7 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
             case "Fantasía":
                 images.add( VideoMedia.fromLocalResources(R.drawable.sonceuponatime, "Once upon a time"));
                 images.add( VideoMedia.fromLocalResources(R.drawable.ssupergirl, "Super Girl"));
+                images.add( VideoMedia.fromLocalResources(R.drawable.sfate, "Fate"));
                 break;
             default:
                 images.add( VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow"));

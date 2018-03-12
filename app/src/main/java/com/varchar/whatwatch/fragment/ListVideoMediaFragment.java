@@ -5,14 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.varchar.whatwatch.R;
-import com.varchar.whatwatch.adapter.CatalogItemAdapter;
-import com.varchar.whatwatch.adapter.HorizontalItemAdapter;
 import com.varchar.whatwatch.adapter.VideoMediaListAdapter;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
 

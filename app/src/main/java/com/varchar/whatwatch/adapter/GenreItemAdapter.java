@@ -19,7 +19,7 @@ import java.util.List;
  * Displays Video Media items horizontally 
  */
 //FIXME: Fetch images from web
-public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAdapter.ImageItemHolder> {
+public class GenreItemAdapter extends RecyclerView.Adapter<GenreItemAdapter.ImageItemHolder> {
 
     public static final String VIDEO_MEDIA_KEY = "VIDEO_MEDIA";
 
@@ -42,7 +42,7 @@ public class HorizontalItemAdapter extends RecyclerView.Adapter<HorizontalItemAd
 
     // CONSTRUCTOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    public HorizontalItemAdapter(List<VideoMedia> videoMediaItems) {
+    public GenreItemAdapter(List<VideoMedia> videoMediaItems) {
         if (videoMediaItems == null){
             this.videoMediaItems = new ArrayList<>();
         }

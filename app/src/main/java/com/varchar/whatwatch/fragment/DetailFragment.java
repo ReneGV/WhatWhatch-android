@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.varchar.whatwatch.adapter.HorizontalItemAdapter;
+import com.varchar.whatwatch.adapter.GenreItemAdapter;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.VideoMedia;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
@@ -68,7 +68,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        videoMedia = (VideoMedia) getActivity().getIntent().getSerializableExtra(HorizontalItemAdapter.VIDEO_MEDIA_KEY);
+        videoMedia = (VideoMedia) getActivity().getIntent().getSerializableExtra(GenreItemAdapter.VIDEO_MEDIA_KEY);
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         // Set detail view text
         TextView textView = (TextView) view.findViewById(R.id.dv_vm_title);

@@ -58,7 +58,7 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 DetailFragment detailFragment = new DetailFragment();
-                activity.getIntent().putExtra(HorizontalItemAdapter.VIDEO_MEDIA_KEY, videoMediaItemHolder.videoMedia);
+                activity.getIntent().putExtra(GenreItemAdapter.VIDEO_MEDIA_KEY, videoMediaItemHolder.videoMedia);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.containerMain,detailFragment)
                         .addToBackStack("BACK_TAG").commit();
 
