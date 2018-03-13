@@ -13,17 +13,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.varchar.whatwatch.fragment.DetailFragment;
 import com.varchar.whatwatch.fragment.GridVideoMediaFragment;
 import com.varchar.whatwatch.fragment.ListVideoMediaFragment;
 import com.varchar.whatwatch.fragment.MailFragment;
 import com.varchar.whatwatch.fragment.SettingsFragment;
-import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
+import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
+import com.varchar.whatwatch.ws.WebServiceHandler;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     private NavigationView navigationView;
     private FloatingActionButton floatingActionButton;
+    private WebServiceHandler webServiceHandler;
     //private DrawerLayout drawer;
 
     @Override
@@ -43,7 +45,10 @@ public class MainActivity extends AppCompatActivity
         setThemeFromPreferences();
         setContentView(R.layout.activity_main);
 
-        WhatWhatchDB whatWhatchDB =  WhatWhatchDB.getInstance(this);
+        WhatWatchDB whatWhatchDB =  WhatWatchDB.getInstance(this);
+
+        WebServiceHandler webServiceHandler = WebServiceHandler.getInstance(this);
+//        webServiceHandler.requestMovies();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

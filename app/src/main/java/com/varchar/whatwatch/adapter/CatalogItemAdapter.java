@@ -1,6 +1,5 @@
 package com.varchar.whatwatch.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.varchar.whatwatch.R;
+import com.varchar.whatwatch.model.Genre;
 import com.varchar.whatwatch.model.VideoMedia;
 
 import java.util.ArrayList;
@@ -41,23 +41,22 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
 
     // ATTRIBUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private List<String> Gender;
-    private Context context;
-    final String CATALOG = "Catalog";
+    private List<Genre> genres;
     int catalog=0;
 
-    public CatalogItemAdapter(List<String> genders, int catalog) {
-        if (genders == null){
-            this.Gender = new ArrayList<>();
-            this.catalog = 0;
+    public CatalogItemAdapter() {
+        this.genres = new ArrayList<>();
+    }
+
+    public CatalogItemAdapter(List<Genre> genres, int catalog) {
+        if (genres == null){
+            this.genres = new ArrayList<>();
         }
         else{
-            this.Gender = genders;
+            this.genres = genres;
             this.catalog = catalog;
-
         }
     }
-//    private RecyclerView imagesRecyclerView;
 
     @Override
     public CatalogItemAdapter.CatalogItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,109 +69,18 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
 
     @Override
     public void onBindViewHolder(CatalogItemAdapter.CatalogItemHolder holder, int position) {
-        holder.genderTextView.setText(Gender.get(position));
+        holder.genderTextView.setText(genres.get(position).getName());
         GenreItemAdapter imageItemAdapter;
+        imageItemAdapter = new GenreItemAdapter(genres.get(position).getVideoMediaList() );
 
-        if (this.catalog == 0){
-            imageItemAdapter = new GenreItemAdapter(getMovies(Gender.get(position)));
-        }
-        else {
-            imageItemAdapter = new GenreItemAdapter(getSeries(Gender.get(position)));
-        }
-
-        //imageItemAdapter = new GenreItemAdapter(getSeries(Gender.get(position)));
         holder.imagesRecyclerView.setAdapter(imageItemAdapter);
 
     }
 
     @Override
     public int getItemCount() {
-        return Gender.size();
+        return genres.size();
     }
 
 
-    // FIXME: FETCH VideoMedia items from web service
-    // TODO : iterate throug series list
-    public static List<VideoMedia> getSeries(String gender){
-        List<VideoMedia> images = new ArrayList<>();
-        switch (gender){
-            case "Acción":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow" ) );
-                images.add( VideoMedia.fromLocalResources(R.drawable.sdaredevil , "DareDevil"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sspartacus , "Spartacus"));
-                break;
-            case "Animación":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sclonewars , "Clone Wars"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sdragones, "Dragones"));
-                break;
-            case "Anime":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sfma , "FMA"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.syugioh , "Yu-gi-oh"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.ssao , "SAO"));
-                break;
-            case "Ciencia Ficción":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sblackmirror , "Black mirror"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sdoctorwho , "Dr. Who"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.ssense8 , "Sense 8"));
-                break;
-            case "Comedia":
-                images.add( VideoMedia.fromLocalResources(R.drawable.shimym , "Himym"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sfullerhouse , "Fuller House"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sfriends , "Friends"));
-                break;
-            case "Drama":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sclubcuervos , "Club de los cuervos"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.selchapo , "El chapo"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.srevenge , "Reveng"));
-                break;
-            case "Fantasía":
-                images.add( VideoMedia.fromLocalResources(R.drawable.sonceuponatime, "Once upon a time"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.ssupergirl, "Super Girl"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sfate, "Fate"));
-                break;
-            default:
-                images.add( VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sdaredevil, "Dare Devil"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sspartacus, "Spartacus"));
-                break;
-        }
-        return images;
-
-    }
-
-    //FIXME: FETCH VideoMedia items from web service
-    public List<VideoMedia> getMovies(String gender){
-        List<VideoMedia> images = new ArrayList<>();
-        switch (gender){
-            case "Comedia":
-                images.add( VideoMedia.fromLocalResources(R.drawable.comoninos , "Como niños"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.scottpilgrim, "Scott"));
-                break;
-            case "Acción":
-                images.add( VideoMedia.fromLocalResources(R.drawable.transformers, "Transformers"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.olimpo , "Olimpo"));
-                break;
-            case "Ciencia Ficción":
-                images.add( VideoMedia.fromLocalResources(R.drawable.meninblack, "Men in back"));
-                break;
-            case "Terror":
-                images.add( VideoMedia.fromLocalResources(R.drawable.avengers, "Avengers"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.elmstreet , "Elm street"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.nochedemonio, "Noche del demonio"));
-                break;
-            case "Animación":
-                images.add( VideoMedia.fromLocalResources(R.drawable.ratatouille, "Ratatouille"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.hoteltransylvania , "Hotel transilvania"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.toystory, "Toy story"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.jack, "Jack"));
-                break;
-            default:
-                images.add( VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sdaredevil , "Dare Devil"));
-                images.add( VideoMedia.fromLocalResources(R.drawable.sspartacus, "Spartacus"));
-                break;
-        }
-        return images;
-
-    }
 }

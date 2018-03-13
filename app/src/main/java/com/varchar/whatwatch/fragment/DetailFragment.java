@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.varchar.whatwatch.adapter.GenreItemAdapter;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.VideoMedia;
-import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
+import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
 
 
 /**
@@ -79,7 +79,7 @@ public class DetailFragment extends Fragment {
         imageView.setImageResource(videoMedia.getImageId());
         //TODO edit favourite button dispay logic
         final FloatingActionButton buttonFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
-        if (WhatWhatchDB.isFavoutie(videoMedia)){
+        if (WhatWatchDB.isFavoutie(videoMedia)){
             //buttonFavourites.setVisibility(View.GONE);
             buttonFavourites.setImageResource(R.drawable.ic_dislike);
             buttonFavourites.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +104,12 @@ public class DetailFragment extends Fragment {
     }
 
     private void addToFavourites(VideoMedia videoMedia){
-        WhatWhatchDB.saveFavourite(videoMedia);
+        WhatWatchDB.saveFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue añadido a favoritos", Snackbar.LENGTH_LONG).show();
     }
 
     private void deleteFromFavourites(VideoMedia videoMedia){
-        WhatWhatchDB.deleteFavourite(videoMedia);
+        WhatWatchDB.deleteFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue removido de favoritos", Snackbar.LENGTH_LONG).show();
     }
 }

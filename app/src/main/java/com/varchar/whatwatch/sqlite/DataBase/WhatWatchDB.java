@@ -12,7 +12,7 @@ import com.varchar.whatwatch.sqlite.contrat.VideoMediaEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WhatWhatchDB extends SQLiteOpenHelper{
+public class WhatWatchDB extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "WhatWatch.db";
@@ -24,15 +24,15 @@ public class WhatWhatchDB extends SQLiteOpenHelper{
             + VideoMediaEntry.LOCAL_IMAGE_ID + " INTEGER NOT NULL,"
             + "UNIQUE (" + VideoMediaEntry.NAME + "))";
 
-    private static WhatWhatchDB dbInstance;
+    private static WhatWatchDB dbInstance;
 
-    private WhatWhatchDB(Context context) {
+    private WhatWatchDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static WhatWhatchDB getInstance(Context context){
+    public static WhatWatchDB getInstance(Context context){
         if(dbInstance == null){
-            dbInstance = new WhatWhatchDB(context);
+            dbInstance = new WhatWatchDB(context);
         }
         return dbInstance;
     }

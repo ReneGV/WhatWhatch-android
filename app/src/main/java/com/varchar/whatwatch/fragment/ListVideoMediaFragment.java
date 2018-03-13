@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.adapter.VideoMediaListAdapter;
-import com.varchar.whatwatch.sqlite.DataBase.WhatWhatchDB;
+import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +71,7 @@ public class ListVideoMediaFragment extends Fragment {
         listVideoMediaRecyclerView.setHasFixedSize(true);
         listVideoMediaRecyclerView.setLayoutManager(manager);
         //FIXME
-        VideoMediaListAdapter videoMediaListAdapter = new VideoMediaListAdapter(WhatWhatchDB.getAllFavourites());
+        VideoMediaListAdapter videoMediaListAdapter = new VideoMediaListAdapter(WhatWatchDB.getAllFavourites());
         listVideoMediaRecyclerView.setAdapter(videoMediaListAdapter);
         return view;
     }

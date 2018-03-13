@@ -24,4 +24,5 @@ public class Movie extends  VideoMedia implements Serializable {
     public void setLength(int length) {
         this.length = length;
     }
+
 }

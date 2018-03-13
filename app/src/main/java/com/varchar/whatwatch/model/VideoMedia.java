@@ -1,11 +1,10 @@
 package com.varchar.whatwatch.model;
 
-import android.provider.MediaStore;
+import com.varchar.whatwatch.R;
 
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.PublicKey;
 
 //FIXME: DELETE HARDCODED IMAGES ID
 public class VideoMedia implements Serializable{
@@ -16,14 +15,16 @@ public class VideoMedia implements Serializable{
     private String name;
     private String releaseDate;
     private String description;
-    private URL imageUrl;
+    private String imageUrl;
     private URL imageDescriptionUrl;
-    private Gender gender;
+    private Genre gender;
 
     //TODO: DELETE THIS IMAGE ID, AND FETCH THE IMAGE FROM WS
     private int imageId;
     //TODO: DELETE THIS GETTET
-    public int getImageId() { return this.imageId;}
+    public int getImageId() {
+        return this.imageId == 0 ? R.drawable.poster_default : imageId;
+    }
     //TODO: DELETE THIS STATIC FACTORY METHOD
     // Set image from local drawable resources
     public static VideoMedia fromLocalResources(int imageId, String name){
@@ -35,15 +36,10 @@ public class VideoMedia implements Serializable{
 
     public VideoMedia(){}
 
-    public VideoMedia(String name, String imageUrl) {
+    public VideoMedia(int id, String name, String imageUrl) {
+        this.id = id;
         this.name = name;
-        URL url = null;
-        try {
-            url = new URL(imageUrl);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        this.imageUrl = url;
+        this.imageUrl = imageUrl;
     }
 
     public VideoMedia(String name, String releaseDate, String description, String imageDescriptionUrl, String gender_name) {
@@ -55,7 +51,7 @@ public class VideoMedia implements Serializable{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        this.gender = new Gender(gender_name);
+        this.gender = new Genre(gender_name);
     }
 
     public int getId() {
@@ -90,11 +86,11 @@ public class VideoMedia implements Serializable{
         this.description = description;
     }
 
-    public URL getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(URL imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -106,11 +102,21 @@ public class VideoMedia implements Serializable{
         this.imageDescriptionUrl = imageDescriptionUrl;
     }
 
-    public Gender getGender() {
+    public Genre getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(Genre gender) {
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return "VideoMedia{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", imageURL=" +imageUrl + '\'' +
+                '}';
+    }
+
 }
