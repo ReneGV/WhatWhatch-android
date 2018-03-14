@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.fragment.DetailFragment;
 import com.varchar.whatwatch.model.VideoMedia;
@@ -77,10 +78,12 @@ public class GenreItemAdapter extends RecyclerView.Adapter<GenreItemAdapter.Imag
     @Override
     public void onBindViewHolder(ImageItemHolder holder, int position) {
         Log.d("[Movie]", videoMediaItems.get(position).getName());
-        //holder.itemImageView.setImageResource(videoMediaItems.get(position).getImageId());
-        // Bind each holder with the corresponding video media
-        //holder.videoMedia = videoMediaItems.get(position);
-        Glide.with(context).load(videoMediaItems.get(position).getImageUrl()).into(holder.itemImageView);
+        holder.videoMedia = videoMediaItems.get(position);
+        Glide.with(holder.itemImageView.getContext())
+                .load(videoMediaItems.get(position).getImageUrl())
+                .apply(new RequestOptions().placeholder(R.drawable.poster_default))
+                .into(holder.itemImageView);
+
 
     }
 

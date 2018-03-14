@@ -29,8 +29,8 @@ import java.util.concurrent.TimeoutException;
 
 public class WebServiceHandler {
 
-    private static String ALL_MOVIES_EMDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllMovies";
-    private static String ALL_SERIES = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllTvSeries";
+    private static String ALL_MOVIES_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllMovies";
+    private static String ALL_SERIES_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllTvSeries";
 
     private static WebServiceHandler instance;
     private static RequestQueue requestQueue;
@@ -47,26 +47,24 @@ public class WebServiceHandler {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public static void requestMovies(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
-        JsonObjectRequest jsonObjectRequest =
-                 new JsonObjectRequest (
-                         Request.Method.GET,
-                         ALL_MOVIES_EMDPOINT,
-                         null,
-                         onSuccess,
-                         onError);
-        addToQueue(jsonObjectRequest);
-    }
-
-    public static void requestSeries(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+    private static void requestVideoMedia(String url , Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest (
                         Request.Method.GET,
-                        ALL_SERIES,
+                        url,
                         null,
                         onSuccess,
                         onError);
         addToQueue(jsonObjectRequest);
+    }
+
+    public static void requestMovies(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+        requestVideoMedia(ALL_MOVIES_ENDPOINT,onSuccess,onError);
+    }
+
+    public static void requestSeries(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+        requestVideoMedia(ALL_SERIES_ENDPOINT,onSuccess,onError);
+
     }
 
 

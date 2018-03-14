@@ -19,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.varchar.whatwatch.adapter.CatalogItemAdapter;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.model.Genre;
+import com.varchar.whatwatch.model.Movie;
+import com.varchar.whatwatch.model.Serie;
 import com.varchar.whatwatch.model.VideoMedia;
 import com.varchar.whatwatch.ws.WebServiceHandler;
 
@@ -95,10 +97,10 @@ public class GridVideoMediaFragment extends Fragment {
         int catalog = preferences.getInt(CATALOG,0);
         CatalogItemAdapter catalogItemAdapter;
         if (catalog==0) {
-            catalogItemAdapter = new CatalogItemAdapter(getGendersMovies(), catalog, getContext());
+            catalogItemAdapter = new CatalogItemAdapter(getCatalog(Movie.class), catalog, getContext());
         }
         else {
-            catalogItemAdapter = new CatalogItemAdapter(getGenders(), catalog, getContext());
+            catalogItemAdapter = new CatalogItemAdapter(getCatalog(Serie.class), catalog, getContext());
         }
         genreRecyclerView.setAdapter(catalogItemAdapter);
         return view;
@@ -109,141 +111,42 @@ public class GridVideoMediaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public List<Genre> getGenders(){
+    public  <T extends VideoMedia> List<Genre> getCatalog ( Class<T> type){
         final List<Genre> genres = new ArrayList<>();
-        WebServiceHandler.requestSeries(
-                new Response.Listener<JSONObject> () {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Iterator<String> keys = response.keys();
-                        try {
-                            while( keys.hasNext() ) {
-                                String genreName = keys.next();
-                                Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName));
-                                if(genre.getVideoMediaList().size()>0){
-                                    genres.add(genre);
-                                }
-                            }
-                        } catch (JSONException exception) {
-                            exception.printStackTrace();
+        Response.Listener<JSONObject> responseListener= new Response.Listener<JSONObject> () {
+            @Override
+            public void onResponse(JSONObject response) {
+                Iterator<String> keys = response.keys();
+                try {
+                    while( keys.hasNext() ) {
+                        String genreName = keys.next();
+                        Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName));
+                        if(genre.getVideoMediaList().size()>0){
+                            genres.add(genre);
                         }
-                        for(Genre g : genres){
-                            Log.d("[JSON-Mapping Genres]", g.toString());
-                        }
-                        genreRecyclerView.getAdapter().notifyDataSetChanged();
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
                 }
-        );
-//        catalogItemAdapter.notifyDataSetChanged();
-        return genres;
-
-        /*
-        List<Genre> genres = new ArrayList<>();
-        Genre accion = new Genre("Accion");
-        accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow" ));
-        accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sdaredevil , "DareDevil"));
-        accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sspartacus , "Spartacus"));
-        genres.add( accion );
-        Genre animacion = new Genre("Animacion");
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sclonewars , "Clone Wars"));
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sdragones, "Dragones"));
-        genres.add( animacion );
-        Genre anime = new Genre("Anime");
-        anime.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sfma , "FMA"));
-        anime.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.syugioh , "Yu-gi-oh"));
-        anime.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.ssao , "SAO"));
-        genres.add( anime );
-        Genre sciFi = new Genre("Ciencia Ficción");
-        sciFi.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sblackmirror , "Black mirror"));
-        sciFi.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sdoctorwho , "Dr. Who"));
-        sciFi.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.ssense8 , "Sense 8"));
-        genres.add( sciFi );
-        Genre comedia = new Genre("Comedia");
-        comedia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.shimym , "Himym"));
-        comedia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sfullerhouse , "Fuller House"));
-        comedia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sfriends , "Friends"));
-        genres.add( comedia );
-        Genre drama = new Genre("Drama");
-        drama.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sclubcuervos , "Club de los cuervos"));
-        drama.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.selchapo , "El chapo"));
-        drama.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.srevenge , "Revenge"));
-        genres.add( drama );
-        Genre fantasia = new Genre("Accion");
-        fantasia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sonceuponatime, "Once upon a time"));
-        fantasia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.ssupergirl, "Super Girl"));
-        fantasia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sfate, "Fate"));
-        genres.add( fantasia );
-        return genres;
-        */
-    }
-
-    public List<Genre> getGendersMovies(){
-        final List<Genre> genres = new ArrayList<>();
-        WebServiceHandler.requestMovies(
-                new Response.Listener<JSONObject> () {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                            Iterator<String> keys = response.keys();
-                            try {
-                                while( keys.hasNext() ) {
-                                    String genreName = keys.next();
-                                    Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName));
-                                    if(genre.getVideoMediaList().size()>0){
-                                        genres.add(genre);
-                                    }
-                                }
-                            } catch (JSONException exception) {
-                                exception.printStackTrace();
-                            }
-                            for(Genre g : genres){
-                                Log.d("[JSON-Mapping Genres]", g.toString());
-                            }
-                        genreRecyclerView.getAdapter().notifyDataSetChanged();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
+                for(Genre g : genres){
+                    Log.d("[JSON-Mapping Genres]", g.toString());
                 }
-        );
-//        catalogItemAdapter.notifyDataSetChanged();
+                genreRecyclerView.getAdapter().notifyDataSetChanged();
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        };
+        if (type.equals(Movie.class)){
+            WebServiceHandler.requestMovies( responseListener, errorListener );
+        } else if(type.equals(Serie.class)){
+            WebServiceHandler.requestSeries( responseListener, errorListener );
+        }
+
         return genres;
 
-        /*
-        List<Genre> genres = new ArrayList<>();
-        // COMEDIA
-        Genre comedia = new Genre("Comedia");
-        comedia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.comoninos , "Como niños"));
-        comedia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.scottpilgrim, "Scott"));
-        genres.add( comedia );
-        // ACCION
-        Genre accion = new Genre("Accion");
-        accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.transformers, "Transformers"));
-        accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.olimpo , "Olimpo"));
-        genres.add( accion );
-        Genre sciFi = new Genre("Cienci Ficción");
-        sciFi.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.meninblack, "Men in back"));
-        genres.add( sciFi );
-        Genre terror = new Genre("Terror");
-        terror.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.avengers, "Avengers"));
-        terror.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.elmstreet , "Elm street"));
-        terror.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.nochedemonio, "Noche del demonio"));
-        genres.add( terror );
-        Genre animacion = new Genre("Animacion");
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.ratatouille, "Ratatouille"));
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.hoteltransylvania , "Hotel transilvania"));
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.toystory, "Toy story"));
-        animacion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.jack, "Jack"));
-        genres.add( animacion );
-        return genres;
-        */
     }
-
-
 }
