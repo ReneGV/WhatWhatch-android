@@ -95,10 +95,10 @@ public class GridVideoMediaFragment extends Fragment {
         int catalog = preferences.getInt(CATALOG,0);
         CatalogItemAdapter catalogItemAdapter;
         if (catalog==0) {
-            catalogItemAdapter = new CatalogItemAdapter(getGendersMovies(), catalog);
+            catalogItemAdapter = new CatalogItemAdapter(getGendersMovies(), catalog, getContext());
         }
         else {
-            catalogItemAdapter = new CatalogItemAdapter(getGenders(), catalog);
+            catalogItemAdapter = new CatalogItemAdapter(getGenders(), catalog, getContext());
         }
         genreRecyclerView.setAdapter(catalogItemAdapter);
         return view;
@@ -110,6 +110,39 @@ public class GridVideoMediaFragment extends Fragment {
     }
 
     public List<Genre> getGenders(){
+        final List<Genre> genres = new ArrayList<>();
+        WebServiceHandler.requestSeries(
+                new Response.Listener<JSONObject> () {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Iterator<String> keys = response.keys();
+                        try {
+                            while( keys.hasNext() ) {
+                                String genreName = keys.next();
+                                Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName));
+                                if(genre.getVideoMediaList().size()>0){
+                                    genres.add(genre);
+                                }
+                            }
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                        for(Genre g : genres){
+                            Log.d("[JSON-Mapping Genres]", g.toString());
+                        }
+                        genreRecyclerView.getAdapter().notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+//        catalogItemAdapter.notifyDataSetChanged();
+        return genres;
+
+        /*
         List<Genre> genres = new ArrayList<>();
         Genre accion = new Genre("Accion");
         accion.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sarrow, "Arrow" ));
@@ -146,6 +179,7 @@ public class GridVideoMediaFragment extends Fragment {
         fantasia.getVideoMediaList().add(VideoMedia.fromLocalResources(R.drawable.sfate, "Fate"));
         genres.add( fantasia );
         return genres;
+        */
     }
 
     public List<Genre> getGendersMovies(){

@@ -1,5 +1,6 @@
 package com.varchar.whatwatch.adapter;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.fragment.DetailFragment;
 import com.varchar.whatwatch.model.VideoMedia;
@@ -39,16 +41,19 @@ public class GenreItemAdapter extends RecyclerView.Adapter<GenreItemAdapter.Imag
     // ATTRIBUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Modify to use wS
     private List<VideoMedia> videoMediaItems;
+    private Context context;
 
     // CONSTRUCTOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    public GenreItemAdapter(List<VideoMedia> videoMediaItems) {
+    public GenreItemAdapter(List<VideoMedia> videoMediaItems, Context context) {
         if (videoMediaItems == null){
             this.videoMediaItems = new ArrayList<>();
         }
         else{
             this.videoMediaItems = videoMediaItems;
+
         }
+        this.context = context;
     }
 
     @Override
@@ -72,9 +77,11 @@ public class GenreItemAdapter extends RecyclerView.Adapter<GenreItemAdapter.Imag
     @Override
     public void onBindViewHolder(ImageItemHolder holder, int position) {
         Log.d("[Movie]", videoMediaItems.get(position).getName());
-        holder.itemImageView.setImageResource(videoMediaItems.get(position).getImageId());
+        //holder.itemImageView.setImageResource(videoMediaItems.get(position).getImageId());
         // Bind each holder with the corresponding video media
-        holder.videoMedia = videoMediaItems.get(position);
+        //holder.videoMedia = videoMediaItems.get(position);
+        Glide.with(context).load(videoMediaItems.get(position).getImageUrl()).into(holder.itemImageView);
+
     }
 
     @Override

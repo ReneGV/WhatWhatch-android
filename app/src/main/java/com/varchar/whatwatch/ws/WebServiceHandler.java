@@ -30,6 +30,7 @@ import java.util.concurrent.TimeoutException;
 public class WebServiceHandler {
 
     private static String ALL_MOVIES_EMDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllMovies";
+    private static String ALL_SERIES = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllTvSeries";
 
     private static WebServiceHandler instance;
     private static RequestQueue requestQueue;
@@ -54,6 +55,17 @@ public class WebServiceHandler {
                          null,
                          onSuccess,
                          onError);
+        addToQueue(jsonObjectRequest);
+    }
+
+    public static void requestSeries(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+        JsonObjectRequest jsonObjectRequest =
+                new JsonObjectRequest (
+                        Request.Method.GET,
+                        ALL_SERIES,
+                        null,
+                        onSuccess,
+                        onError);
         addToQueue(jsonObjectRequest);
     }
 

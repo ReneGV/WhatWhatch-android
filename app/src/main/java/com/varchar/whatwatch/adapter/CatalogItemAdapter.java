@@ -1,5 +1,6 @@
 package com.varchar.whatwatch.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -43,18 +44,20 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
 
     private List<Genre> genres;
     int catalog=0;
+    private Context context;
 
     public CatalogItemAdapter() {
         this.genres = new ArrayList<>();
     }
 
-    public CatalogItemAdapter(List<Genre> genres, int catalog) {
+    public CatalogItemAdapter(List<Genre> genres, int catalog, Context context) {
         if (genres == null){
             this.genres = new ArrayList<>();
         }
         else{
             this.genres = genres;
             this.catalog = catalog;
+            this.context = context;
         }
     }
 
@@ -71,7 +74,7 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
     public void onBindViewHolder(CatalogItemAdapter.CatalogItemHolder holder, int position) {
         holder.genderTextView.setText(genres.get(position).getName());
         GenreItemAdapter imageItemAdapter;
-        imageItemAdapter = new GenreItemAdapter(genres.get(position).getVideoMediaList() );
+        imageItemAdapter = new GenreItemAdapter(genres.get(position).getVideoMediaList(), context);
 
         holder.imagesRecyclerView.setAdapter(imageItemAdapter);
 
