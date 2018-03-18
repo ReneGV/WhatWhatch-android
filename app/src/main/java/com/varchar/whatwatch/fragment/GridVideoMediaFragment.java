@@ -113,6 +113,8 @@ public class GridVideoMediaFragment extends Fragment {
 
     public  <T extends VideoMedia> List<Genre> getCatalog ( Class<T> type){
         final List<Genre> genres = new ArrayList<>();
+        //final VideoMedia.VideoType videoType = type.equals(Movie.class) ? VideoMedia.VideoType.MOVIE : VideoMedia.VideoType.SERIE;
+
         Response.Listener<JSONObject> responseListener= new Response.Listener<JSONObject> () {
             @Override
             public void onResponse(JSONObject response) {
@@ -120,7 +122,7 @@ public class GridVideoMediaFragment extends Fragment {
                 try {
                     while( keys.hasNext() ) {
                         String genreName = keys.next();
-                        Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName));
+                        Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName)/*,videoType*/);
                         if(genre.getVideoMediaList().size()>0){
                             genres.add(genre);
                         }
@@ -140,6 +142,7 @@ public class GridVideoMediaFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
             }
         };
+
         if (type.equals(Movie.class)){
             WebServiceHandler.requestMovies( responseListener, errorListener );
         } else if(type.equals(Serie.class)){

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.varchar.whatwatch.R;
 import com.varchar.whatwatch.fragment.DetailFragment;
 import com.varchar.whatwatch.model.VideoMedia;
@@ -22,19 +24,22 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
     // INNER CLASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     static class VideoMediaItemHolder extends RecyclerView.ViewHolder {
 
+        ImageView imageView;
+        TextView textViewName;
+        TextView textViewGenre;
+        TextView textViewDate;
 
-        public ImageView imageView;
-        public TextView textViewName;
-        public VideoMedia videoMedia;
-        public LinearLayout linearLayout;
+        VideoMedia videoMedia;
+        LinearLayout linearLayout;
 
         public VideoMediaItemHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.fv_poster);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.fv_linear_layout);
             textViewName = (TextView) itemView.findViewById(R.id.fv_name);
+            textViewDate = (TextView) itemView.findViewById(R.id.fv_release_date);
+            textViewGenre = (TextView) itemView.findViewById(R.id.fv_genre);
         }
-
     }
 
     // ATTRIBUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,8 +75,18 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
     @Override
     public void onBindViewHolder(VideoMediaListAdapter.VideoMediaItemHolder holder, int position) {
         holder.videoMedia = videoMediaItems.get(position);
-        holder.imageView.setImageResource(holder.videoMedia.getImageId());
+
+        Glide.with(holder.imageView.getContext())
+                .load(holder.videoMedia.getImageUrl())
+                .apply(new RequestOptions().placeholder(R.drawable.poster_default))
+                .into(holder.imageView);
         holder.textViewName.setText(holder.videoMedia.getName());
+        if(holder.videoMedia.getGender() != null){
+            holder.textViewGenre.setText(holder.videoMedia.getGender().getName());
+        }
+        if(holder.videoMedia.getReleaseDate() != null){
+            holder.textViewDate.setText(holder.videoMedia.getReleaseDate().substring(0,10));
+        }
     }
 
     @Override

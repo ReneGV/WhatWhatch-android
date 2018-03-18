@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.varchar.whatwatch.adapter.GenreItemAdapter;
 import com.varchar.whatwatch.R;
@@ -77,6 +78,8 @@ public class DetailFragment extends Fragment {
         // TODO: fetch imagee from web
         ImageView imageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
         imageView.setImageResource(videoMedia.getImageId());
+
+        //Toast.makeText(getActivity().getBaseContext(),videoMedia.getType().toString(), Toast.LENGTH_LONG).show();
         //TODO edit favourite button dispay logic
         final FloatingActionButton buttonFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
         if (WhatWatchDB.isFavoutie(videoMedia)){

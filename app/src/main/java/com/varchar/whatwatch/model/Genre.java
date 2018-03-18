@@ -25,13 +25,15 @@ public class Genre implements Serializable{
         this.name = name;
     }
 
-    public static Genre fromJSON(String name, JSONArray jsonMovies) throws JSONException {
+    public static Genre fromJSON(String name, JSONArray jsonMovies/*,VideoMedia.VideoType videoType*/) throws JSONException {
         Genre genre = new Genre(name);
             for (int movieIndex = 0; movieIndex < jsonMovies.length(); movieIndex++) {
                 JSONObject jsonMovie = jsonMovies.getJSONObject(movieIndex);
-                VideoMedia videoMedia = new VideoMedia(jsonMovie.getInt("id"),
+                VideoMedia videoMedia = new VideoMedia(
+                        jsonMovie.getInt("id"),
                         jsonMovie.getString("name"),
                         jsonMovie.getString("collectionViewImage"));
+                //videoMedia.setType(videoType);
                 genre.getVideoMediaList().add(videoMedia);
 
             }

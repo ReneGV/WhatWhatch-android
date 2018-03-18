@@ -121,10 +121,14 @@ public class SearchFragment extends Fragment {
             public void onResponse(JSONArray response) {
                 try {
                     for(int index = 0; index < response.length(); index++){
-                        JSONObject videoRespose = response.getJSONObject(index);
+                        JSONObject videoResponse = response.getJSONObject(index);
                         VideoMedia videoMedia = new VideoMedia();
-                        videoMedia.setId(videoRespose.getInt("id"));
-                        videoMedia.setName(videoRespose.getString("name"));
+                        videoMedia.setId(videoResponse.getInt("id"));
+                        videoMedia.setName(videoResponse.getString("name"));
+                        videoMedia.setGender(new Genre(videoResponse.getString("genre")));
+                        videoMedia.setImageUrl(videoResponse.getString("posterImage"));
+                        videoMedia.setReleaseDate(videoResponse.getString("productionDate"));
+                        //videoMedia.setType(videoResponse.getString("type"));
                         searchResults.add(videoMedia);
                     }
                 } catch (JSONException exception) {

@@ -85,5 +85,4 @@ public class CatalogItemAdapter extends RecyclerView.Adapter<CatalogItemAdapter.
         return genres.size();
     }
 
-
 }
