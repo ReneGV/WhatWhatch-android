@@ -1,5 +1,7 @@
 package com.varchar.whatwatch;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,14 +16,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.varchar.whatwatch.fragment.GridVideoMediaFragment;
 import com.varchar.whatwatch.fragment.ListVideoMediaFragment;
 import com.varchar.whatwatch.fragment.MailFragment;
+import com.varchar.whatwatch.fragment.SearchFragment;
 import com.varchar.whatwatch.fragment.SettingsFragment;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
 import com.varchar.whatwatch.ws.WebServiceHandler;
@@ -98,8 +105,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+       // Inflate the options menu from XML
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnSearchClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switchFragment(R.id.containerMain, SearchFragment.newInstance("",""), "FAVORITE");
+                    }
+                }
+
+        );
         return true;
     }
 
@@ -111,7 +132,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            switchFragment(R.id.containerMain, SearchFragment.newInstance("",""), "FAVORITE");
             return true;
         }
 
@@ -131,9 +153,10 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
+        SearchView searchView = (SearchView)  findViewById(R.id.action_search);
 
         if (id == R.id.nav_movie) {
+            searchView.onActionViewCollapsed();
             editor.putInt(CATALOG, 0);
             editor.apply();
             switchFragment(R.id.containerMain, GridVideoMediaFragment.newInstance("",""), "MOVIE");
@@ -141,6 +164,7 @@ public class MainActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_serie) {
+            searchView.onActionViewCollapsed();
             editor.putInt(CATALOG, 1);
             editor.apply();
             switchFragment(R.id.containerMain, GridVideoMediaFragment.newInstance("",""), "SERIE");
@@ -149,14 +173,22 @@ public class MainActivity extends AppCompatActivity
 
         } //else if (id == R.id.nav_premium) {}
         else if (id == R.id.nav_favourites) {
+            searchView.onActionViewCollapsed();
             switchFragment(R.id.containerMain, ListVideoMediaFragment.newInstance("",""), "FAVORITE");
             drawer.closeDrawer(GravityCompat.START);
         }
+        else if (id == R.id.nav_search) {
+            searchView.onActionViewExpanded();
+            switchFragment(R.id.containerMain, SearchFragment.newInstance("",""), "SEARCH");
+            drawer.closeDrawer(GravityCompat.START);
+        }
         else if (id == R.id.nav_mail) {
+            searchView.onActionViewCollapsed();
             switchFragment(R.id.containerMain, MailFragment.newInstance("",""), "MAIL");
             drawer.closeDrawer(GravityCompat.START);
 
         }  else if (id == R.id.nav_settings) {
+            searchView.onActionViewCollapsed();
             switchFragment(R.id.containerMain, SettingsFragment.newInstance("",""), "SETTINGS");
             drawer.closeDrawer(GravityCompat.START);
             return true;

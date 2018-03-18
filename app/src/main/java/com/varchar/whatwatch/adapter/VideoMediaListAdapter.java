@@ -79,4 +79,13 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
         return videoMediaItems.size();
     }
 
+    public List<VideoMedia> getVideoMediaItems() {
+        return videoMediaItems;
+    }
+
+    public void setVideoMediaItems(List<VideoMedia> videoMediaItems) {
+        this.videoMediaItems = videoMediaItems;
+    }
+
+
 }
