@@ -68,7 +68,7 @@ public class WhatWatchDB extends SQLiteOpenHelper{
 //        values.put(VideoMediaEntry.GENRE, videoMedia.getGender().getName());
         values.put(VideoMediaEntry.DESCRIPTION, videoMedia.getDescription());
         values.put(VideoMediaEntry.RELEASE_DATE, videoMedia.getReleaseDate());
-        //values.put(VideoMediaEntry.TYPE, videoMedia.getType().toString());
+        values.put(VideoMediaEntry.TYPE, videoMedia.getType().toString());
 
 
         return sqLiteDatabase.insert(
@@ -123,7 +123,7 @@ public class WhatWatchDB extends SQLiteOpenHelper{
             videoMedia.setGender( new Genre(c.getString(c.getColumnIndex(VideoMediaEntry.GENRE))));
             videoMedia.setDescription( c.getString(c.getColumnIndex(VideoMediaEntry.DESCRIPTION)));
             videoMedia.setReleaseDate( c.getString(c.getColumnIndex(VideoMediaEntry.RELEASE_DATE)));
-            //videoMedia.setType(c.getString(c.getColumnIndex(VideoMediaEntry.TYPE)));
+            videoMedia.setType(c.getString(c.getColumnIndex(VideoMediaEntry.TYPE)));
             favourites.add(videoMedia);
         }
         return favourites;

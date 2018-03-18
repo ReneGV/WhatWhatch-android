@@ -128,7 +128,7 @@ public class SearchFragment extends Fragment {
                         videoMedia.setGender(new Genre(videoResponse.getString("genre")));
                         videoMedia.setImageUrl(videoResponse.getString("posterImage"));
                         videoMedia.setReleaseDate(videoResponse.getString("productionDate"));
-                        //videoMedia.setType(videoResponse.getString("type"));
+                        videoMedia.setType(videoResponse.getString("type"));
                         searchResults.add(videoMedia);
                     }
                 } catch (JSONException exception) {

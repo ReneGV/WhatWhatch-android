@@ -113,7 +113,7 @@ public class GridVideoMediaFragment extends Fragment {
 
     public  <T extends VideoMedia> List<Genre> getCatalog ( Class<T> type){
         final List<Genre> genres = new ArrayList<>();
-        //final VideoMedia.VideoType videoType = type.equals(Movie.class) ? VideoMedia.VideoType.MOVIE : VideoMedia.VideoType.SERIE;
+        final VideoMedia.VideoType videoType = type.equals(Movie.class) ? VideoMedia.VideoType.MOVIE : VideoMedia.VideoType.SERIE;
 
         Response.Listener<JSONObject> responseListener= new Response.Listener<JSONObject> () {
             @Override
@@ -122,7 +122,7 @@ public class GridVideoMediaFragment extends Fragment {
                 try {
                     while( keys.hasNext() ) {
                         String genreName = keys.next();
-                        Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName)/*,videoType*/);
+                        Genre genre = Genre.fromJSON(genreName, response.getJSONArray(genreName),videoType);
                         if(genre.getVideoMediaList().size()>0){
                             genres.add(genre);
                         }

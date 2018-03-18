@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 //FIXME: DELETE HARDCODED IMAGES ID
 public class VideoMedia implements Serializable{
-/*
+
     public static enum VideoType{
         SERIE("serie"),
         MOVIE("movie");
@@ -24,7 +24,7 @@ public class VideoMedia implements Serializable{
         public String toString() {
             return this.typeName;
         }
-    }*/
+    }
 
     private static final long serialVersionUID = 8799656478674716638L;
 
@@ -35,7 +35,7 @@ public class VideoMedia implements Serializable{
     private String imageUrl;
     private String detailImageUrl;
     private Genre gender;
-//    private VideoType type;
+   private VideoType type;
 
     //TODO: DELETE THIS IMAGE ID, AND FETCH THE IMAGE FROM WS
     private int imageId;
@@ -125,7 +125,7 @@ public class VideoMedia implements Serializable{
     public void setGender(Genre gender) {
         this.gender = gender;
     }
-/*
+
     public VideoType getType() {
         return type;
     }
@@ -141,7 +141,7 @@ public class VideoMedia implements Serializable{
             this.type = VideoType.SERIE;
         }
     }
-*/
+
 
     @Override
     public String toString() {
