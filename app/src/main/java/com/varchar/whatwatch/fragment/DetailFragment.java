@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,8 @@ public class DetailFragment extends Fragment {
         ImageView imageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
         imageView.setImageResource(videoMedia.getImageId());
 
+        SearchView searchView = (SearchView) getActivity().findViewById(R.id.action_search);
+        searchView.onActionViewCollapsed();
         Toast.makeText(getActivity().getBaseContext(),videoMedia.getType().toString(), Toast.LENGTH_LONG).show();
         //TODO edit favourite button dispay logic
         final FloatingActionButton buttonFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);

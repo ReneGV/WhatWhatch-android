@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         SearchView searchView = (SearchView)  findViewById(R.id.action_search);
-
+        searchView.onActionViewCollapsed();
         if (id == R.id.nav_movie) {
             searchView.onActionViewCollapsed();
             editor.putInt(CATALOG, 0);
