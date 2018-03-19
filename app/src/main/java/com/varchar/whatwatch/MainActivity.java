@@ -15,7 +15,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,10 +22,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.varchar.whatwatch.fragment.GridVideoMediaFragment;
-import com.varchar.whatwatch.fragment.ListVideoMediaFragment;
+import com.varchar.whatwatch.fragment.FavouriteMediaFragment;
 import com.varchar.whatwatch.fragment.MailFragment;
 import com.varchar.whatwatch.fragment.SearchFragment;
 import com.varchar.whatwatch.fragment.SettingsFragment;
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity
         } //else if (id == R.id.nav_premium) {}
         else if (id == R.id.nav_favourites) {
             searchView.onActionViewCollapsed();
-            switchFragment(R.id.containerMain, ListVideoMediaFragment.newInstance("",""), "FAVORITE");
+            switchFragment(R.id.containerMain, FavouriteMediaFragment.newInstance("",""), "FAVORITE");
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (id == R.id.nav_search) {

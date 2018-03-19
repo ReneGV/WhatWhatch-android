@@ -10,15 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.varchar.whatwatch.R;
-import com.varchar.whatwatch.adapter.VideoMediaListAdapter;
+import com.varchar.whatwatch.adapter.FavouriteAdapter;
+import com.varchar.whatwatch.adapter.SearchListAdapter;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListVideoMediaFragment#newInstance} factory method to
+ * Use the {@link FavouriteMediaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListVideoMediaFragment extends Fragment {
+public class FavouriteMediaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +31,7 @@ public class ListVideoMediaFragment extends Fragment {
 
     private RecyclerView listVideoMediaRecyclerView;
 
-    public ListVideoMediaFragment() {
+    public FavouriteMediaFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class ListVideoMediaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListVideoMediaFragment.
+     * @return A new instance of fragment FavouriteMediaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListVideoMediaFragment newInstance(String param1, String param2) {
-        ListVideoMediaFragment fragment = new ListVideoMediaFragment();
+    public static FavouriteMediaFragment newInstance(String param1, String param2) {
+        FavouriteMediaFragment fragment = new FavouriteMediaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,8 +72,8 @@ public class ListVideoMediaFragment extends Fragment {
         listVideoMediaRecyclerView.setHasFixedSize(true);
         listVideoMediaRecyclerView.setLayoutManager(manager);
         //FIXME
-        VideoMediaListAdapter videoMediaListAdapter = new VideoMediaListAdapter(WhatWatchDB.getAllFavourites());
-        listVideoMediaRecyclerView.setAdapter(videoMediaListAdapter);
+        FavouriteAdapter favouriteAdapter = new FavouriteAdapter(WhatWatchDB.getAllFavourites());
+        listVideoMediaRecyclerView.setAdapter(favouriteAdapter);
         return view;
     }
 

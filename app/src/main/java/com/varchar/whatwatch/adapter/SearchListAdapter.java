@@ -19,7 +19,7 @@ import com.varchar.whatwatch.model.VideoMedia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAdapter.VideoMediaItemHolder>{
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.VideoMediaItemHolder>{
 
     // INNER CLASS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     static class VideoMediaItemHolder extends RecyclerView.ViewHolder {
@@ -34,11 +34,11 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
 
         public VideoMediaItemHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.fv_poster);
+            imageView = (ImageView) itemView.findViewById(R.id.sr_poster);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.fv_linear_layout);
-            textViewName = (TextView) itemView.findViewById(R.id.fv_name);
-            textViewDate = (TextView) itemView.findViewById(R.id.fv_release_date);
-            textViewGenre = (TextView) itemView.findViewById(R.id.fv_genre);
+            textViewName = (TextView) itemView.findViewById(R.id.sr_name);
+            textViewDate = (TextView) itemView.findViewById(R.id.sr_release_date);
+            textViewGenre = (TextView) itemView.findViewById(R.id.sr_genre);
         }
     }
 
@@ -48,15 +48,15 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
     // CONSTRUCTOR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-    public VideoMediaListAdapter(List<VideoMedia> videoMediaItems) {
+    public SearchListAdapter(List<VideoMedia> videoMediaItems) {
         if (videoMediaItems == null) {this.videoMediaItems = new ArrayList<>();}
         else {this.videoMediaItems = videoMediaItems;}
     }
 
     @Override
-    public VideoMediaListAdapter.VideoMediaItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SearchListAdapter.VideoMediaItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favourite,parent,false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search,parent,false);
         final VideoMediaItemHolder videoMediaItemHolder = new VideoMediaItemHolder(item);
         videoMediaItemHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class VideoMediaListAdapter extends RecyclerView.Adapter<VideoMediaListAd
     }
 
     @Override
-    public void onBindViewHolder(VideoMediaListAdapter.VideoMediaItemHolder holder, int position) {
+    public void onBindViewHolder(SearchListAdapter.VideoMediaItemHolder holder, int position) {
         holder.videoMedia = videoMediaItems.get(position);
 
         Glide.with(holder.imageView.getContext())

@@ -1,29 +1,21 @@
 package com.varchar.whatwatch.fragment;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.varchar.whatwatch.R;
-import com.varchar.whatwatch.adapter.VideoMediaListAdapter;
+import com.varchar.whatwatch.adapter.SearchListAdapter;
 import com.varchar.whatwatch.model.Genre;
-import com.varchar.whatwatch.model.Movie;
-import com.varchar.whatwatch.model.Serie;
 import com.varchar.whatwatch.model.VideoMedia;
-import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
 import com.varchar.whatwatch.ws.WebServiceHandler;
 
 import org.json.JSONArray;
@@ -31,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -44,7 +35,7 @@ public class SearchFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private VideoMediaListAdapter videoMediaListAdapter;
+    private SearchListAdapter searchListAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,7 +53,7 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListVideoMediaFragment.
+     * @return A new instance of fragment FavouriteMediaFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static SearchFragment newInstance(String param1, String param2) {
@@ -93,8 +84,8 @@ public class SearchFragment extends Fragment {
         listVideoMediaRecyclerView.setHasFixedSize(true);
         listVideoMediaRecyclerView.setLayoutManager(manager);
         //FIXME
-        videoMediaListAdapter = new VideoMediaListAdapter(new ArrayList<VideoMedia>());
-        listVideoMediaRecyclerView.setAdapter(videoMediaListAdapter);
+        searchListAdapter = new SearchListAdapter(new ArrayList<VideoMedia>());
+        listVideoMediaRecyclerView.setAdapter(searchListAdapter);
         SearchView searchView = (SearchView) getActivity().findViewById(R.id.action_search);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -137,8 +128,8 @@ public class SearchFragment extends Fragment {
                 for(VideoMedia v : searchResults){
                     Log.d("[JSON-Search]", v.toString());
                 }
-                videoMediaListAdapter.setVideoMediaItems(searchResults);
-                videoMediaListAdapter.notifyDataSetChanged();
+                searchListAdapter.setVideoMediaItems(searchResults);
+                searchListAdapter.notifyDataSetChanged();
             }
         };
 

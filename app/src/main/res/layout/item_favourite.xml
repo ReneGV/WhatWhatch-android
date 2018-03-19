@@ -4,55 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="16dp"
     app:cardCornerRadius="5dp">
 
-    <LinearLayout
-        android:id="@+id/fv_linear_layout"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fv_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="192dp">
 
         <ImageView
-            android:id="@+id/fv_poster"
-            android:layout_width="60dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:srcCompat="@drawable/default_movie" />
+            android:id="@+id/fv_image"
+            android:layout_width="368dp"
+            android:layout_height="192dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/video_default" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/fv_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/fv_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
+            android:text="video_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fv_filter"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Video media name" />
 
-            <TextView
-                android:id="@+id/fv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Video media name"
-                android:textSize="18sp" />
+    </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/fv_genre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fv_name"
-                android:layout_marginTop="2dp"
-                android:text="Genre"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/fv_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fv_genre"
-                android:layout_marginTop="2dp"
-                android:text="2017-01-01"
-                android:textSize="14sp"
-                android:textStyle="italic" />
-        </RelativeLayout>
-    </LinearLayout>
 </android.support.v7.widget.CardView>
