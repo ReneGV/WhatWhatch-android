@@ -53,6 +53,19 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8sp"
+                android:layout_marginLeft="16sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="0sp"
+                android:numStars="5"
+                android:rating="4"
+                android:stepSize="0.5" />
+
             <TextView
                 android:id="@+id/dv_vm_description"
                 android:layout_width="match_parent"
@@ -61,10 +74,11 @@
                 android:layout_marginLeft="16sp"
                 android:layout_marginRight="16sp"
                 android:layout_marginStart="16sp"
-                android:layout_marginTop="0sp"
+                android:layout_marginTop="8sp"
                 android:text="."
                 android:textAlignment="viewStart"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. " />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
