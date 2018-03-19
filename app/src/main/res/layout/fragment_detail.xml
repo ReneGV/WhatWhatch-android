@@ -51,7 +51,8 @@
                 android:text="Title"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -76,8 +77,36 @@
                 android:layout_marginStart="16sp"
                 android:layout_marginTop="8sp"
                 android:text="."
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. " />
+
+            <TextView
+                android:id="@+id/dv_vm_releaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16sp"
+                android:layout_marginLeft="16sp"
+                android:layout_marginRight="16sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="8sp"
+                android:text="."
+                android:textAlignment="center"
+                tools:text="Release Date: yyyy-mm-dd" />
+
+            <TextView
+                android:id="@+id/dv_vm_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16sp"
+                android:layout_marginLeft="16sp"
+                android:layout_marginRight="16sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="8sp"
+                android:text="."
+                android:textAlignment="center"
+                tools:text="Genre: ?????" />
+
+
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

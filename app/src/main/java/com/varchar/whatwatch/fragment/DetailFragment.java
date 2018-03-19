@@ -47,6 +47,9 @@ public class DetailFragment extends Fragment {
 
     private TextView descriptionTextView;
     private ImageView detailImageView;
+    private TextView releaseDateTextView;
+    private TextView genreTextView;
+
     public DetailFragment() {
         // Required empty public constructor
     }
@@ -85,13 +88,16 @@ public class DetailFragment extends Fragment {
         videoMedia = (VideoMedia) getActivity().getIntent().getSerializableExtra(GenreItemAdapter.VIDEO_MEDIA_KEY);
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         // Set detail view text
-        TextView textView = (TextView) view.findViewById(R.id.dv_vm_title);
-        textView.setText( videoMedia.getName() );
+        TextView titleTextView = (TextView) view.findViewById(R.id.dv_vm_title);
+        titleTextView.setText( videoMedia.getName() );
 
         descriptionTextView = (TextView) view.findViewById(R.id.dv_vm_description);
         // Set the image
         // TODO: fetch imagee from web
         detailImageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
+
+        releaseDateTextView = (TextView) view.findViewById(R.id.dv_vm_releaseDate);
+        genreTextView = (TextView) view.findViewById(R.id.dv_vm_genre);
 
         SearchView searchView = (SearchView) getActivity().findViewById(R.id.action_search);
         searchView.onActionViewCollapsed();
@@ -138,6 +144,8 @@ public class DetailFragment extends Fragment {
                 .load(videoMedia.getDetailImageUrl())
                 .apply(new RequestOptions().placeholder(R.drawable.video_default))
                 .into(detailImageView);
+        releaseDateTextView.setText("Fecha de estreno: " + videoMedia.getReleaseDate().substring(0,10));
+        genreTextView.setText("Género: " + videoMedia.getGender().getName());
 
         setFavouriteIcon();
     }
@@ -178,5 +186,6 @@ public class DetailFragment extends Fragment {
         WhatWatchDB.deleteFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue removido de favoritos", Snackbar.LENGTH_LONG).show();
     }
+
 
 }
