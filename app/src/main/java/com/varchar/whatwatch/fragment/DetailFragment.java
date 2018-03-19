@@ -1,6 +1,7 @@
 package com.varchar.whatwatch.fragment;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.varchar.whatwatch.adapter.GenreItemAdapter;
 import com.varchar.whatwatch.R;
+import com.varchar.whatwatch.model.Genre;
 import com.varchar.whatwatch.model.VideoMedia;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
+import com.varchar.whatwatch.ws.WebServiceHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -35,6 +45,8 @@ public class DetailFragment extends Fragment {
 
     private VideoMedia videoMedia;
 
+    private TextView descriptionTextView;
+    private ImageView detailImageView;
     public DetailFragment() {
         // Required empty public constructor
     }
@@ -75,16 +87,66 @@ public class DetailFragment extends Fragment {
         // Set detail view text
         TextView textView = (TextView) view.findViewById(R.id.dv_vm_title);
         textView.setText( videoMedia.getName() );
+
+        descriptionTextView = (TextView) view.findViewById(R.id.dv_vm_description);
         // Set the image
         // TODO: fetch imagee from web
-        ImageView imageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
-        imageView.setImageResource(videoMedia.getImageId());
+        detailImageView = (ImageView) view.findViewById(R.id.dv_app_bar_image);
 
         SearchView searchView = (SearchView) getActivity().findViewById(R.id.action_search);
         searchView.onActionViewCollapsed();
-        Toast.makeText(getActivity().getBaseContext(),videoMedia.getType().toString(), Toast.LENGTH_LONG).show();
-        //TODO edit favourite button dispay logic
-        final FloatingActionButton buttonFavourites = (FloatingActionButton) view.findViewById(R.id.dv_add_favourite);
+        // Fetch data from web service
+        getSelectedVideoMedia();
+
+        return view;
+    }
+
+
+    private void getSelectedVideoMedia(){
+        Response.Listener<JSONObject> responseListener= new Response.Listener<JSONObject> () {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    videoMedia.setDescription(response.getString("description"));
+                    videoMedia.setDetailImageUrl(response.getString("descriptionImage"));
+                    videoMedia.setGender(new Genre(response.getString("genderName")));
+                    videoMedia.setReleaseDate(response.getString("productionDate"));
+
+                    render();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        };
+
+        if (videoMedia.getType() == VideoMedia.VideoType.MOVIE){
+            WebServiceHandler.requestMovie(videoMedia.getId(),responseListener,errorListener);
+        }else{
+            WebServiceHandler.requestSerie(videoMedia.getId(),responseListener,errorListener);
+        }
+    }
+
+    private void render(){
+        descriptionTextView.setText(videoMedia.getDescription());
+        Glide.with(getActivity().getBaseContext())
+                .load(videoMedia.getDetailImageUrl())
+                .apply(new RequestOptions().placeholder(R.drawable.video_default))
+                .into(detailImageView);
+
+        setFavouriteIcon();
+    }
+
+    // FAVOURITES LOGIC
+
+    private void setFavouriteIcon(){
+        final FloatingActionButton buttonFavourites = (FloatingActionButton) getActivity().findViewById(R.id.dv_add_favourite);
+        buttonFavourites.setVisibility(View.VISIBLE);
         if (WhatWatchDB.isFavoutie(videoMedia)){
             //buttonFavourites.setVisibility(View.GONE);
             buttonFavourites.setImageResource(R.drawable.ic_dislike);
@@ -105,8 +167,6 @@ public class DetailFragment extends Fragment {
                 }
             });
         }
-
-        return view;
     }
 
     private void addToFavourites(VideoMedia videoMedia){
@@ -118,4 +178,5 @@ public class DetailFragment extends Fragment {
         WhatWatchDB.deleteFavourite(videoMedia);
         Snackbar.make(getView(), videoMedia.getName() + " fue removido de favoritos", Snackbar.LENGTH_LONG).show();
     }
+
 }

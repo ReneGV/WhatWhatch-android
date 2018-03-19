@@ -62,8 +62,9 @@
                 android:layout_marginRight="16sp"
                 android:layout_marginStart="16sp"
                 android:layout_marginTop="0sp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. Vivamus sit amet mauris tincidunt, accumsan nunc quis, tempor nibh. Sed sollicitudin augue ut justo vulputate, id ultricies quam posuere. Fusce velit dolor, tempus vitae aliquet in, iaculis pharetra sem. Nulla facilisi. Mauris maximus neque quis enim fringilla scelerisque. Duis mattis volutpat lacinia. Nulla bibendum libero in blandit ultrices. Mauris nec lectus sit amet ex maximus viverra. Phasellus laoreet enim elit, sit amet hendrerit dolor dictum ac. Etiam vel molestie felis, nec vestibulum nisl. Vivamus quis erat ut ligula viverra varius. Ut faucibus massa diam, eget eleifend enim mollis rutrum.  Fusce ac erat convallis, convallis dolor in, vehicula mauris. Aliquam sodales dolor magna, sed sagittis diam blandit ac. Aenean ac varius quam. Suspendisse tempor aliquam blandit. Etiam id purus blandit, laoreet dolor ac, congue velit. Cras pharetra sem nec neque sagittis, gravida mollis velit facilisis. Morbi tristique rhoncus sapien in consectetur."
-                android:textAlignment="viewStart" />
+                android:text="."
+                android:textAlignment="viewStart"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. " />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -75,5 +76,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_favorite"
+        android:visibility="invisible"
         app:backgroundTint="@android:color/holo_blue_dark" />
 </android.support.design.widget.CoordinatorLayout>

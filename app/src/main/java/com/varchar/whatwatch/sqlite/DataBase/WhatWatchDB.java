@@ -65,7 +65,7 @@ public class WhatWatchDB extends SQLiteOpenHelper{
         values.put(VideoMediaEntry.LOCAL_IMAGE_ID, videoMedia.getImageId());
         values.put(VideoMediaEntry.IMAGE_URL, videoMedia.getImageUrl());
         values.put(VideoMediaEntry.DETAIL_IMAGE_URL, videoMedia.getDetailImageUrl());
-//        values.put(VideoMediaEntry.GENRE, videoMedia.getGender().getName());
+        values.put(VideoMediaEntry.GENRE, videoMedia.getGender().getName());
         values.put(VideoMediaEntry.DESCRIPTION, videoMedia.getDescription());
         values.put(VideoMediaEntry.RELEASE_DATE, videoMedia.getReleaseDate());
         values.put(VideoMediaEntry.TYPE, videoMedia.getType().toString());

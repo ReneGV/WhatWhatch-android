@@ -36,6 +36,8 @@ public class WebServiceHandler {
     private static String ALL_MOVIES_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllMovies";
     private static String ALL_SERIES_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getAllTvSeries";
     private static String SEARCH_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getCoincidences?text=";
+    public  static String SINGLE_MOVIE_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getMovieInfo?id=";
+    public  static String SINGLE_SERIE_ENDPOINT = "https://c20xw6hcc4.execute-api.us-east-1.amazonaws.com/prod/getSerieInfo?id=";
 
     private static WebServiceHandler instance;
     private static RequestQueue requestQueue;
@@ -69,8 +71,16 @@ public class WebServiceHandler {
 
     public static void requestSeries(Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
         requestVideoMedia(ALL_SERIES_ENDPOINT,onSuccess,onError);
-
     }
+
+    public static void requestMovie(int id , Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+        requestVideoMedia(SINGLE_MOVIE_ENDPOINT + id ,onSuccess,onError);
+    }
+
+    public static void requestSerie(int id, Response.Listener<JSONObject> onSuccess, Response.ErrorListener   onError){
+        requestVideoMedia(SINGLE_SERIE_ENDPOINT + id, onSuccess,onError);
+    }
+
 
     public static Request<JSONArray> searchVideoMedia(String queryString, Response.Listener<JSONArray> onSuccess, Response.ErrorListener   onError){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
