@@ -1,4 +1,4 @@
-package com.varchar.whatwatch;
+package com.varchar.whatwatch.utils;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
