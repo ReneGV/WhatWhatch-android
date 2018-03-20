@@ -19,12 +19,12 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="colapsed_detail" >
+    <style name="colapsed_detail">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffffff</item>
     </style>
 
-    <style name="extemded_detail" >
+    <style name="extemded_detail">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">#ffffff</item>
     </style>
@@ -37,8 +37,8 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    
-    
+
 </resources>
