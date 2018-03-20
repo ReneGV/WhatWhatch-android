@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.varchar.whatwatch.utils.NetworkVerification;
+import com.varchar.whatwatch.utils.PreferedTheme;
 
 //import com.varchar.WhatWatch.R;
 
@@ -17,14 +18,15 @@ public class NoNetworkActivity extends AppCompatActivity {
 
     private Button againButton;
     private Button enterButton;
+    private PreferedTheme preferedTheme = new PreferedTheme();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferedTheme.setThemeFromPreferences(NoNetworkActivity.this);
         setContentView(R.layout.activity_no_network);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         againButton = (Button)findViewById(R.id.againButton);
         enterButton = (Button)findViewById(R.id.enterButton);

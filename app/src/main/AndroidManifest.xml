@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".NoNetworkActivity"
-            android:label="@string/title_activity_no_network"
+            android:label="What Watch"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity

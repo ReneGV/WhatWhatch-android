@@ -29,6 +29,7 @@ import com.varchar.whatwatch.fragment.MailFragment;
 import com.varchar.whatwatch.fragment.SearchFragment;
 import com.varchar.whatwatch.fragment.SettingsFragment;
 import com.varchar.whatwatch.sqlite.DataBase.WhatWatchDB;
+import com.varchar.whatwatch.utils.PreferedTheme;
 import com.varchar.whatwatch.ws.WebServiceHandler;
 
 public class MainActivity extends AppCompatActivity
@@ -41,13 +42,14 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private FloatingActionButton floatingActionButton;
     private WebServiceHandler webServiceHandler;
+    private PreferedTheme preferedTheme = new PreferedTheme();
     //private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: Fetch the theme acording to shared preferences configuration eg: set
-        setThemeFromPreferences();
+        preferedTheme.setThemeFromPreferences(MainActivity.this);
         setContentView(R.layout.activity_main);
 
         WhatWatchDB whatWhatchDB =  WhatWatchDB.getInstance(this);
@@ -71,21 +73,6 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().add(R.id.containerMain, GridVideoMediaFragment.newInstance("",""),"SERIES").commit();
 
-    }
-
-    public  void setThemeFromPreferences(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        int theme = preferences.getInt(APPLICATION_THEME,0);
-        switch (theme){
-            case 0:
-                setTheme(R.style.AppTheme);
-                break;
-            case 1:
-            default:
-                setTheme(R.style.LightTheme);
-                break;
-        }
-        Log.d("THEME", Integer.toString(theme));
     }
 
     @Override

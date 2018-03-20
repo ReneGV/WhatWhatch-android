@@ -8,14 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.varchar.whatwatch.utils.NetworkVerification;
+import com.varchar.whatwatch.utils.PreferedTheme;
 
 //import com.varchar.WhatWatch.R;
 
 public class EnterActivity extends AppCompatActivity {
 
+    private PreferedTheme preferedTheme = new PreferedTheme();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferedTheme.setThemeFromPreferences(EnterActivity.this);
         setContentView(R.layout.activity_enter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
