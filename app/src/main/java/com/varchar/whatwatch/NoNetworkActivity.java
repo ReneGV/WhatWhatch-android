@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.varchar.whatwatch.utils.NetworkVerification;
-import com.varchar.whatwatch.utils.PreferedTheme;
 
 //import com.varchar.WhatWatch.R;
 
@@ -21,19 +20,29 @@ public class NoNetworkActivity extends AppCompatActivity {
 
     private Button againButton;
     private Button enterButton;
-    final String  APPLICATION_THEME = "ApplicationTheme";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setThemeFromPreferences();
+    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_no_network);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         againButton = (Button)findViewById(R.id.againButton);
         enterButton = (Button)findViewById(R.id.enterButton);
+
+        NetworkVerification networkVerification = new NetworkVerification();
+        Intent intent;
+        boolean net = networkVerification.isNetAvailable(getSystemService(Context.CONNECTIVITY_SERVICE));
+        if (net == true) {
+            Toast.makeText(getBaseContext(), "Conexión establecida", Toast.LENGTH_SHORT).show();
+            intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+
 
         againButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,22 +76,5 @@ public class NoNetworkActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void setThemeFromPreferences(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(NoNetworkActivity.this);
-        int theme = preferences.getInt(APPLICATION_THEME,0);
-        switch (theme){
-            case 0:
-                setTheme(R.style.AppTheme);
-                break;
-            case 1:
-            default:
-                setTheme(R.style.LightTheme);
-                break;
-        }
-        Log.d("THEME", Integer.toString(theme));
-    }
-
-
 
 }
