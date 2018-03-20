@@ -73,21 +73,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public  void setThemeFromPreferences(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        int theme = preferences.getInt(APPLICATION_THEME,0);
-        switch (theme){
-            case 0:
-                setTheme(R.style.AppTheme);
-                break;
-            case 1:
-            default:
-                setTheme(R.style.LightTheme);
-                break;
-        }
-        Log.d("THEME", Integer.toString(theme));
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -196,6 +181,21 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
+    public void setThemeFromPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        int theme = preferences.getInt(APPLICATION_THEME,0);
+        switch (theme){
+            case 0:
+                setTheme(R.style.AppTheme);
+                break;
+            case 1:
+            default:
+                setTheme(R.style.LightTheme);
+                break;
+        }
+        Log.d("THEME", Integer.toString(theme));
+    }
+
     private void switchFragment(int idContainer, Fragment fragment, String tag){
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragment != null){
@@ -208,6 +208,5 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
         }
     }
-
 
 }
