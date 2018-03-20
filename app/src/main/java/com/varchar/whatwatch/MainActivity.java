@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // TODO Edit scope
-    final String  APPLICATION_THEME = "ApplicationTheme";
     final String  CATALOG = "Catalog";
 
     private NavigationView navigationView;
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: Fetch the theme acording to shared preferences configuration eg: set
-        preferedTheme.setThemeFromPreferences(MainActivity.this);
         setContentView(R.layout.activity_main);
 
         WhatWatchDB whatWhatchDB =  WhatWatchDB.getInstance(this);

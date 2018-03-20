@@ -24,12 +24,12 @@
         <activity
             android:name=".NoNetworkActivity"
             android:label="What Watch"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".EnterActivity"
             android:label="What Watch"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
 
             <intent-filter>

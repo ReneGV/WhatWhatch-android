@@ -2,9 +2,12 @@ package com.varchar.whatwatch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.varchar.whatwatch.utils.NetworkVerification;
@@ -14,13 +17,13 @@ import com.varchar.whatwatch.utils.PreferedTheme;
 
 public class EnterActivity extends AppCompatActivity {
 
-    private PreferedTheme preferedTheme = new PreferedTheme();
+    final String  APPLICATION_THEME = "ApplicationTheme";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferedTheme.setThemeFromPreferences(EnterActivity.this);
+        setThemeFromPreferences();
         setContentView(R.layout.activity_enter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,6 +44,22 @@ public class EnterActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+
+    public void setThemeFromPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EnterActivity.this);
+        int theme = preferences.getInt(APPLICATION_THEME,0);
+        switch (theme){
+            case 0:
+                setTheme(R.style.AppTheme);
+                break;
+            case 1:
+            default:
+                setTheme(R.style.LightTheme);
+                break;
+        }
+        Log.d("THEME", Integer.toString(theme));
     }
 
 }
