@@ -41,7 +41,9 @@ public class NoNetworkActivity extends AppCompatActivity {
                 if (net == true){
                     Toast.makeText(getBaseContext(), "Conexión establecida", Toast.LENGTH_SHORT).show();
                     i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
+                    finish();
 
                 }
                 else {
@@ -55,7 +57,9 @@ public class NoNetworkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(getApplicationContext(), MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
+                finish();
             }
         });
     }

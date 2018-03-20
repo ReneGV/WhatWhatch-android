@@ -34,7 +34,9 @@ public class EnterActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Sin conexión", Toast.LENGTH_SHORT).show();
             i = new Intent(getApplicationContext(), NoNetworkActivity.class);
         }
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
+        finish();
     }
 
     @Override
