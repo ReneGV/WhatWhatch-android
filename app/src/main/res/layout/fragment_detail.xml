@@ -52,7 +52,7 @@
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textAlignment="viewStart"/>
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -77,7 +77,7 @@
                 android:layout_marginStart="16sp"
                 android:layout_marginTop="8sp"
                 android:text="."
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus libero, aliquam non diam iaculis, mattis dapibus ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a diam congue justo condimentum dignissim ut vitae enim. Vivamus rutrum finibus felis ullamcorper venenatis. " />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_marginStart="16sp"
                 android:layout_marginTop="8sp"
                 android:text="."
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 tools:text="Release Date: yyyy-mm-dd" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_marginStart="16sp"
                 android:layout_marginTop="8sp"
                 android:text="."
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 tools:text="Genre: ?????" />
 
 

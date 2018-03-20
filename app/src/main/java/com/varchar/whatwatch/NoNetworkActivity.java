@@ -11,10 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.varchar.whatwatch.utils.NetworkVerification;
-
-//import com.varchar.WhatWatch.R;
 
 public class NoNetworkActivity extends AppCompatActivity {
 
@@ -36,7 +33,6 @@ public class NoNetworkActivity extends AppCompatActivity {
         Intent intent;
         boolean net = networkVerification.isNetAvailable(getSystemService(Context.CONNECTIVITY_SERVICE));
         if (net == true) {
-            Toast.makeText(getBaseContext(), "Conexión establecida", Toast.LENGTH_SHORT).show();
             intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
