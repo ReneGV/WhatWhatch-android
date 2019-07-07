@@ -4,7 +4,7 @@
 ![WhatWatch](readme-images/ic_launcher.png)
 ![WhatWatch](readme-images/ic_launcher.png)
 
-WhatWhatch for Android was a simple buy yet complete application that [@nakir](https://github.com/Nakyr) when we were at a movile development course.
+WhatWhatch for Android was a simple buy yet complete application that I developed with [@nakir](https://github.com/Nakyr) when we were at a movile development course.
 
 Some features included 
  - Webservice usage
