@@ -12,11 +12,11 @@ Some features included
  - User preferences usage
  - Incremental search
 
-![WhatWatch](readme-images/whatwatch-main.png)
-![WhatWatch](readme-images/whatwatch-hamburger.png)
-![WhatWatch](readme-images/whatwatch-detail.png)
-![WhatWatch](readme-images/whatwatch-favs.png)
-![WhatWatch](readme-images/whatwatch-search.png)
+![WhatWatch](readme-images/whatwtch-main.PNG)
+![WhatWatch](readme-images/watchwatch-hamburger.PNG)
+![WhatWatch](readme-images/whatwatch-detail.PNG)
+![WhatWatch](readme-images/whatwatch-favs.PNG)
+![WhatWatch](readme-images/whatwatch-search.PNG)
 
 It currently doesnot work since I powered of the backend database, but I will work over it when I got some free time.
 
